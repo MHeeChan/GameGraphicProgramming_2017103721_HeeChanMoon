@@ -43,7 +43,6 @@ INT WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
     if (FAILED(library::InitWindow(hInstance, nCmdShow)))
         return 0;
     
-
     if (FAILED(library::InitDevice()))
     {
         library::CleanupDevice();
@@ -52,6 +51,7 @@ INT WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 
     // Main message loop
     MSG msg = { 0 };
+
     while (WM_QUIT != msg.message)
     {
         if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
