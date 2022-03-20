@@ -591,10 +591,6 @@ C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt\wrl\implements
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt\wrl\event.h(519,1): warning C4625: 'Microsoft::WRL::Details::EventTargetArray': 복사 생성자가 암시적으로 삭제된 것으로 정의되었습니다.
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt\wrl\event.h(519,1): warning C4626: 'Microsoft::WRL::Details::EventTargetArray': 대입 연산자가 암시적으로 삭제된 것으로 정의되었습니다.
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt\wrl\event.h(502,1): warning C4365: 'return': '__int64'에서 'size_t'(으)로의 변환입니다. signed 또는 unsigned가 일치하지 않습니다.
-C:\Users\MHC\source\repos\GmG\Source\Library\Game\Game.cpp(75,17): warning C4189: 'height': 지역 변수가 초기화되었으나 참조되지 않았습니다.
-C:\Users\MHC\source\repos\GmG\Source\Library\Game\Game.cpp(74,17): warning C4189: 'width': 지역 변수가 초기화되었으나 참조되지 않았습니다.
-C:\Users\MHC\source\repos\GmG\Source\Library\Game\Game.cpp(126,40): warning C4365: '초기화 중': 'LONG'에서 'UINT'(으)로의 변환입니다. signed 또는 unsigned가 일치하지 않습니다.
-C:\Users\MHC\source\repos\GmG\Source\Library\Game\Game.cpp(127,41): warning C4365: '초기화 중': 'LONG'에서 'UINT'(으)로의 변환입니다. signed 또는 unsigned가 일치하지 않습니다.
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt\wrl\implements.h(1623,1): warning C4365: '초기화 중': 'LONG'에서 'unsigned long'(으)로의 변환입니다. signed 또는 unsigned가 일치하지 않습니다.
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt\wrl\implements.h(1623): message : 클래스 템플릿 멤버 함수 'unsigned long Microsoft::WRL::Details::RuntimeClassImpl<Microsoft::WRL::RuntimeClassFlags<2>,true,false,true,IUnknown>::InternalRelease(void) noexcept'을(를) 컴파일하는 중입니다.
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt\wrl\implements.h(1585): message : 컴파일되는 함수 템플릿 인스턴스화 'unsigned long Microsoft::WRL::Details::RuntimeClassImpl<Microsoft::WRL::RuntimeClassFlags<2>,true,false,true,IUnknown>::InternalRelease(void) noexcept'에 대한 참조를 확인하세요.
@@ -618,12 +614,12 @@ C:\Users\MHC\source\repos\GmG\Source\Library\Game\Game.cpp(193): warning C5045: 
 C:\Users\MHC\source\repos\GmG\Source\Library\Game\Game.cpp(168): warning C5045: 컴파일러는 /Qspectre 스위치가 지정된 경우 메모리 로드를 위해 스펙터 완화를 삽입합니다.
   C:\Users\MHC\source\repos\GmG\Source\Library\Game\Game.cpp(167) : 참고: 이 줄에서 비교에 의해 검사된 인덱스 'hr' 범위
   C:\Users\MHC\source\repos\GmG\Source\Library\Game\Game.cpp(168) : 참고: 이 줄에서 호출 피드
-C:\Users\MHC\source\repos\GmG\Source\Library\Game\Game.cpp(160): warning C5045: 컴파일러는 /Qspectre 스위치가 지정된 경우 메모리 로드를 위해 스펙터 완화를 삽입합니다.
-  C:\Users\MHC\source\repos\GmG\Source\Library\Game\Game.cpp(151) : 참고: 이 줄에서 비교에 의해 검사된 인덱스 'driverTypeIndex' 범위
-  C:\Users\MHC\source\repos\GmG\Source\Library\Game\Game.cpp(160) : 참고: 이 줄에서 호출 피드
-C:\Users\MHC\source\repos\GmG\Source\Library\Game\Game.cpp(154): warning C5045: 컴파일러는 /Qspectre 스위치가 지정된 경우 메모리 로드를 위해 스펙터 완화를 삽입합니다.
-  C:\Users\MHC\source\repos\GmG\Source\Library\Game\Game.cpp(151) : 참고: 이 줄에서 비교에 의해 검사된 인덱스 'driverTypeIndex' 범위
-  C:\Users\MHC\source\repos\GmG\Source\Library\Game\Game.cpp(154) : 참고: 이 줄에서 호출 피드
+C:\Users\MHC\source\repos\GmG\Source\Library\Game\Game.cpp(159): warning C5045: 컴파일러는 /Qspectre 스위치가 지정된 경우 메모리 로드를 위해 스펙터 완화를 삽입합니다.
+  C:\Users\MHC\source\repos\GmG\Source\Library\Game\Game.cpp(150) : 참고: 이 줄에서 비교에 의해 검사된 인덱스 'driverTypeIndex' 범위
+  C:\Users\MHC\source\repos\GmG\Source\Library\Game\Game.cpp(159) : 참고: 이 줄에서 호출 피드
+C:\Users\MHC\source\repos\GmG\Source\Library\Game\Game.cpp(153): warning C5045: 컴파일러는 /Qspectre 스위치가 지정된 경우 메모리 로드를 위해 스펙터 완화를 삽입합니다.
+  C:\Users\MHC\source\repos\GmG\Source\Library\Game\Game.cpp(150) : 참고: 이 줄에서 비교에 의해 검사된 인덱스 'driverTypeIndex' 범위
+  C:\Users\MHC\source\repos\GmG\Source\Library\Game\Game.cpp(153) : 참고: 이 줄에서 호출 피드
   Library.vcxproj -> C:\Users\MHC\source\repos\GmG\Build\x64\Debug\Libraryd.lib
   하위 디렉터리 또는 파일 C:\Users\MHC\source\repos\GmG\Build\..\Library\x64\Debug이(가) 이미 있습니다.
   C:\Users\MHC\source\repos\GmG\Build\x64\Debug\Game.exe

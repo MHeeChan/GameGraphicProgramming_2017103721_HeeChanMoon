@@ -61,7 +61,7 @@ INT WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
         }
         else
         {
-            library::Render();
+         library::Render();
         }
     }
 

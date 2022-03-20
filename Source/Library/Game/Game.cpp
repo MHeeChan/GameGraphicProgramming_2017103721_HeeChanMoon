@@ -71,9 +71,8 @@ namespace library
         {
         case WM_SIZE:
         {
-            int width = LOWORD(lParam);  // Macro to get the low-order word.
-            int height = HIWORD(lParam); // Macro to get the high-order word.
-
+            //int width = LOWORD(lParam);  // Macro to get the low-order word.
+            //int height = HIWORD(lParam); // Macro to get the high-order word.
             // Respond to the message:
             //OnSize(hWnd, (UINT)wParam, width, height);
         }
@@ -82,7 +81,7 @@ namespace library
         return DefWindowProc(hWnd, uMsg, wParam, lParam);
     }
 
-    HRESULT InitWindow(HINSTANCE hInstance, int nCmdShow)
+    HRESULT InitWindow(_In_ HINSTANCE hInstance, _In_ int nCmdShow)
     {
         // Register class
         WNDCLASSEX wcex; // 윈도우 클래스 선언
@@ -105,7 +104,7 @@ namespace library
         g_hInst = hInstance;
         RECT rc = { 0, 0, 800, 600 };
         AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE); // 작업영역, 윈도우 스타일, 메뉴여부
-        g_hWnd = CreateWindow(L"TutorialWindowClass", L"Direct3D 11 Tutorial 1: Direct3D 11 Basics", /// wide character 이기 때문에 L을 붙임
+        g_hWnd = CreateWindow(L"TutorialWindowClass", L"Game Graphics Programming Lab 01: Direct3D 11 Basics", /// wide character 이기 때문에 L을 붙임
             WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX,
             CW_USEDEFAULT, CW_USEDEFAULT, rc.right - rc.left, rc.bottom - rc.top, nullptr, nullptr, hInstance,
             nullptr);
@@ -123,8 +122,8 @@ namespace library
 
         RECT rc;
         GetClientRect(g_hWnd, &rc);
-        UINT width = rc.right - rc.left;
-        UINT height = rc.bottom - rc.top;
+        UINT width = (UINT(rc.right - rc.left)); // unsigned 또는 signed가 일치하지 않습니다. 수정
+        UINT height = (UINT(rc.bottom - rc.top));
 
         UINT createDeviceFlags = 0;
 #ifdef _DEBUG
@@ -164,6 +163,7 @@ namespace library
             if (SUCCEEDED(hr))
                 break;
         }
+
         if (FAILED(hr))
             return hr;
 
@@ -273,8 +273,8 @@ namespace library
 
         // Setup the viewport
         D3D11_VIEWPORT vp;
-        vp.Width = (FLOAT)width;
-        vp.Height = (FLOAT)height;
+        vp.Width = static_cast<FLOAT>(width);
+        vp.Height = static_cast<FLOAT>(height);
         vp.MinDepth = 0.0f;
         vp.MaxDepth = 1.0f;
         vp.TopLeftX = 0;
