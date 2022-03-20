@@ -1,16 +1,6 @@
 ﻿  코드를 생성하고 있습니다.
-  Previous IPDB and IOBJ mismatch, fall back to full compilation.
-C:\Users\MHC\source\repos\GmG\Source\Library\Game\Game.cpp(260): warning C5045: 컴파일러는 /Qspectre 스위치가 지정된 경우 메모리 로드를 위해 스펙터 완화를 삽입합니다.
-  C:\Users\MHC\source\repos\GmG\Source\Library\Game\Game.cpp(259) : 참고: 이 줄에서 비교에 의해 검사된 인덱스 'hr' 범위
-  C:\Users\MHC\source\repos\GmG\Source\Library\Game\Game.cpp(260) : 참고: 이 줄에서 호출 피드
-C:\Users\MHC\source\repos\GmG\Source\Library\Game\Game.cpp(195): warning C5045: 컴파일러는 /Qspectre 스위치가 지정된 경우 메모리 로드를 위해 스펙터 완화를 삽입합니다.
-  C:\Users\MHC\source\repos\GmG\Source\Library\Game\Game.cpp(194) : 참고: 이 줄에서 비교에 의해 검사된 인덱스 'hr' 범위
-  C:\Users\MHC\source\repos\GmG\Source\Library\Game\Game.cpp(195) : 참고: 이 줄에서 호출 피드
-C:\Users\MHC\source\repos\GmG\Source\Library\Game\Game.cpp(170): warning C5045: 컴파일러는 /Qspectre 스위치가 지정된 경우 메모리 로드를 위해 스펙터 완화를 삽입합니다.
-  C:\Users\MHC\source\repos\GmG\Source\Library\Game\Game.cpp(169) : 참고: 이 줄에서 비교에 의해 검사된 인덱스 'hr' 범위
-  C:\Users\MHC\source\repos\GmG\Source\Library\Game\Game.cpp(170) : 참고: 이 줄에서 호출 피드
-C:\Users\MHC\source\repos\GmG\Source\Game\Main.cpp(43): warning C4711: 자동 인라인 확장을 위해 'long __cdecl library::InitWindow(struct HINSTANCE__ * __ptr64,int)' 함수가 선택되었습니다.
-C:\Users\MHC\source\repos\GmG\Source\Game\Main.cpp(64): warning C4711: 자동 인라인 확장을 위해 'void __cdecl library::Render(void)' 함수가 선택되었습니다.
-  All 135 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  1 of 135 functions ( 0.7%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    1 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.
   Game.vcxproj -> C:\Users\MHC\source\repos\GmG\Build\x64\Release\Game.exe

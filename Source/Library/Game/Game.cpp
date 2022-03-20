@@ -68,17 +68,28 @@ namespace library
 
     LRESULT CALLBACK WindowProc(_In_ HWND hWnd, _In_ UINT uMsg, _In_ WPARAM wParam, _In_ LPARAM lParam)
     {
+        /*
         switch (uMsg)
         {
         case WM_QUIT:
-            {
-                DestroyWindow(hWnd);
-                return 0;
-            }
-            //
+            DestroyWindow(hWnd);
+            break;
         case WM_DESTROY:
             PostQuitMessage(0);
-            return 0;
+            break;
+        }
+        return DefWindowProc(hWnd, uMsg, wParam, lParam);
+        */
+        // close -> destroy -> quit 순서대로 진행
+        switch (uMsg)
+        {
+        case WM_CLOSE:
+            DestroyWindow(hWnd);
+        case WM_DESTROY:
+            PostQuitMessage(0);
+        case WM_QUIT:
+        default:
+            break;
         }
         return DefWindowProc(hWnd, uMsg, wParam, lParam);
     }
