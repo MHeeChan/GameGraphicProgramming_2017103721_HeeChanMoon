@@ -62,6 +62,7 @@ namespace library
     --------------------------------------------------------------------*/
     LRESULT MainWindow::HandleMessage(_In_ UINT uMsg, _In_ WPARAM wParam, _In_ LPARAM lParam)
     {
+        //queue ¹æ½Ä
         switch (uMsg)
         {
         case WM_CLOSE:

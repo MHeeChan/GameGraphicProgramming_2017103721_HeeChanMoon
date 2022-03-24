@@ -55,6 +55,7 @@ namespace library
 
         HWND GetWindow() const;
 
+
     protected:
         HRESULT initialize(
             _In_ HINSTANCE hInstance,
@@ -98,8 +99,8 @@ namespace library
       TODO: BaseWindow<DerivedType>::WindowProc definition (remove the comment)
     --------------------------------------------------------------------*/
     template <class DerivedType>
-    LRESULT BaseWindow<DerivedType>::WindowProc(_In_ HWND hWnd, _In_ UINT uMsg, _In_ WPARAM wParam, _In_ LPARAM lParam)
-    {
+    LRESULT WindowProc(_In_ HWND hWnd, _In_ UINT uMsg, _In_ WPARAM wParam, _In_ LPARAM lParam)
+    { 
         DerivedType *pThis = NULL; 
         if (uMsg == WM_NCCREATE)
         {
@@ -121,7 +122,6 @@ namespace library
         */       
             pThis = (DerivedType*)pCreate->lpCreateParams;
             SetWindowLongPtr(hWnd, GWLP_USERDATA, (LONG_PTR)pThis);
-
             pThis->m_hWnd = hWnd;
         }
         else
@@ -170,6 +170,8 @@ namespace library
     }
 
 
+
+
     /*M+M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M
       Method:   BaseWindow<DerivedType>::initialize
 
@@ -207,8 +209,8 @@ namespace library
     /*--------------------------------------------------------------------
       TODO: BaseWindow<DerivedType>::initialize definition (remove the comment)
     --------------------------------------------------------------------*/
-    template <class DerivedType>
-    HRESULT BaseWindow<DerivedType>::initialize(_In_ HINSTANCE hInstance,
+    template <class DerivedType> 
+    HRESULT BaseWindow<DerivedType>::initialize(_In_ HINSTANCE hInstance, // register class
         _In_ INT nCmdShow,
         _In_ PCWSTR pszWindowName,
         _In_ DWORD dwStyle,
@@ -222,7 +224,7 @@ namespace library
         WNDCLASSEX wcex;
         wcex.cbSize = sizeof(WNDCLASSEX);
         wcex.style = CS_HREDRAW | CS_VREDRAW;
-        wcex.lpfnWndProc = WindowProc;
+        wcex.lpfnWndProc = WindowProc; // 함수 포인터 저장
         wcex.cbClsExtra = 0;
         wcex.cbWndExtra = 0;
         wcex.hInstance = hInstance;
@@ -230,13 +232,13 @@ namespace library
         wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
         wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
         wcex.lpszMenuName = nullptr;
-        wcex.lpszClassName = L"TutorialWindowClass";
+        wcex.lpszClassName = GetWindowClassName();
         wcex.hIconSm = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_APPLICATION));
         if (!RegisterClassEx(&wcex))
             return E_FAIL;
-
+         
         // Create window
-        m_hInstance = hInstance;
+        m_hInstance = hInstance; // main에서 입력받은 hinstance 전역변수에 저장 
         RECT rc = { 0, 0, 800, 600 };
         AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
         m_hWnd = CreateWindow(
@@ -255,7 +257,7 @@ namespace library
         if (!m_hWnd)
             return E_FAIL;
 
-        ShowWindow(m_hWnd, nCmdShow);
+        ShowWindow(m_hWnd, nCmdShow); 
 
         return S_OK;
     }

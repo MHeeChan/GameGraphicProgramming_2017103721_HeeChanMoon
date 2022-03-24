@@ -21,8 +21,8 @@ namespace library
     /*C+C+++C+++C+++C+++C+++C+++C+++C+++C+++C+++C+++C+++C+++C+++C+++C+++C
       Class:    MainWindow
 
-      Summary:  Main window to be used in game engine
 
+      Summary:  Main window to be used in game engine
       Methods:  Initialize
                   Initializes window
                 GetWindowClassName

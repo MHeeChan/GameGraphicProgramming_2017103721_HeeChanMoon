@@ -2,6 +2,7 @@
 
 namespace library
 {
+	
 	/*M+M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M
 	  Method:   Game::Game
 
@@ -15,7 +16,7 @@ namespace library
 	/*--------------------------------------------------------------------
 	  TODO: Game::Game definition (remove the comment)
 	--------------------------------------------------------------------*/
-	Game::Game(_In_ PCWSTR pszGameName) :m_pszGameName(NULL) {}
+	Game::Game(_In_ PCWSTR pszGameName) :m_pszGameName(pszGameName) {}
 
 	/*M+M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M
 	  Method:   Game::Initialize
@@ -38,8 +39,12 @@ namespace library
 	--------------------------------------------------------------------*/
 	HRESULT Game::Initialize(_In_ HINSTANCE hInstance, _In_ INT nCmdShow)
 	{
-		m_mainWindow -> MainWindow::MainWindow();
-		m_renderer -> Renderer::Renderer();
+		// m_mainWindow -> MainWindow::MainWindow();
+		m_mainWindow->MainWindow::Initialize(hInstance, nCmdShow, m_pszGameName);
+		//m_renderer -> Renderer::Renderer();
+		m_renderer->Renderer::Initialize(m_mainWindow->GetWindow());
+		// MainWindow.cpp 에서는 BaseWindow 에서 정의한 GetWindow()를 호출하는데 Game.cpp 안에서는 호출을 못하고 WinUser.h 안에 있는 GetWindow를 호출합니다.
+
 		//initialize
 		return TRUE;
 		
@@ -58,7 +63,8 @@ namespace library
 	--------------------------------------------------------------------*/
 	INT Game::Run()
 	{
-		MSG msg = { 0 };
+		MSG msg = {0};
+		// msg.hwnd -> 메시지가 발생한 윈도우
 		while (WM_QUIT != msg.message)
 		{
 			if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
