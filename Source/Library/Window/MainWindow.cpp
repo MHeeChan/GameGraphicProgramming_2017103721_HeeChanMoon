@@ -23,7 +23,7 @@ namespace library
     --------------------------------------------------------------------*/
     HRESULT MainWindow::Initialize(_In_ HINSTANCE hInstance, _In_ INT nCmdShow, _In_ PCWSTR pszWindowName)
     {
-        return initialize(hInstance, nCmdShow, pszWindowName, CS_HREDRAW | CS_VREDRAW);
+        return initialize(hInstance, nCmdShow, pszWindowName, WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX);
     }
 
     /*M+M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M
@@ -65,14 +65,25 @@ namespace library
         //queue ¹æ½Ä
         switch (uMsg)
         {
-        case WM_CLOSE:
-            DestroyWindow(GetWindow());
-        case WM_DESTROY:
-            PostQuitMessage(0);
-        case WM_QUIT:
-        default:
-            break;
+            switch (uMsg)
+            {
+            case WM_DESTROY:
+                PostQuitMessage(0);
+                return 0;
+
+            case WM_PAINT:
+            {
+                PAINTSTRUCT ps;
+                HDC hdc = BeginPaint(m_hWnd, &ps);
+                FillRect(hdc, &ps.rcPaint, (HBRUSH)(COLOR_WINDOW + 1));
+                EndPaint(m_hWnd, &ps);
+            }
+            return 0;
+
+            default:
+                return DefWindowProc(m_hWnd, uMsg, wParam, lParam);
+            }
+            return TRUE;
         }
-        return DefWindowProc(m_hWnd , uMsg, wParam, lParam);
     }
 }

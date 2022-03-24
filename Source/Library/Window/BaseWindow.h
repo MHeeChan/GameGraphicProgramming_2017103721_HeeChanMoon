@@ -99,36 +99,44 @@ namespace library
       TODO: BaseWindow<DerivedType>::WindowProc definition (remove the comment)
     --------------------------------------------------------------------*/
     template <class DerivedType>
-    LRESULT WindowProc(_In_ HWND hWnd, _In_ UINT uMsg, _In_ WPARAM wParam, _In_ LPARAM lParam)
+    LRESULT BaseWindow<DerivedType>::WindowProc(_In_ HWND hWnd, _In_ UINT uMsg, _In_ WPARAM wParam, _In_ LPARAM lParam)
     { 
-        DerivedType *pThis = NULL; 
+        /*
+        DerivedType* pThis = nullptr;
+
+        if (uMsg == WM_NCCREATE)
+        {
+            CREATESTRUCT* pCreate = reinterpret_cast<CREATESTRUCT*>(lParam);
+            pThis = reinterpret_cast<DerivedType*>(pCreate->lpCreateParams);
+            pThis->m_hWnd = hWnd;
+            SetWindowLongPtr(hWnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(pThis));
+        }
+        else
+        {
+            pThis = reinterpret_cast<DerivedType*>(GetWindowLongPtr(hWnd, GWLP_USERDATA));
+        }
+
+        if (pThis)
+        {
+            return pThis->HandleMessage(uMsg, wParam, lParam);
+        }
+        return DefWindowProc(hWnd, uMsg, wParam, lParam);
+        */
+
+        DerivedType* pThis = NULL;
+
         if (uMsg == WM_NCCREATE)
         {
             CREATESTRUCT* pCreate = (CREATESTRUCT*)lParam;
-        /* 
-        s LPVOID lpCreateParams; 
-        HINSTANCE hInstance;
-        HMENU hMenu;
-        HWND hwndParent;
-        int cy;
-        int cx;
-        int y;
-        int x;
-        긴 스타일;
-        LPCTSTR lpszName;
-        LPCTSTR lpszClass;
-        DWORD dwExStyle;
-        등을 담고 있는 구조체 포인터 만들어주고 얘는 iParam 이부분을 가르킴
-        */       
             pThis = (DerivedType*)pCreate->lpCreateParams;
             SetWindowLongPtr(hWnd, GWLP_USERDATA, (LONG_PTR)pThis);
+
             pThis->m_hWnd = hWnd;
         }
         else
         {
             pThis = (DerivedType*)GetWindowLongPtr(hWnd, GWLP_USERDATA);
         }
-
         if (pThis)
         {
             return pThis->HandleMessage(uMsg, wParam, lParam);
@@ -137,6 +145,7 @@ namespace library
         {
             return DefWindowProc(hWnd, uMsg, wParam, lParam);
         }
+
     }
 
     /*M+M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M
@@ -150,7 +159,11 @@ namespace library
       TODO: BaseWindow<DerivedType>::BaseWindow definition (remove the comment)
     --------------------------------------------------------------------*/
     template <class DerivedType>
-    BaseWindow<DerivedType>::BaseWindow():m_hInstance(NULL), m_hWnd(NULL), m_pszWindowName(L"WindowName") {}
+    BaseWindow<DerivedType>::BaseWindow()
+    {
+        m_hInstance = nullptr;
+        return;
+    }
 
     /*M+M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M
         Method:   BaseWindow<DerivedType>::GetWindow()
@@ -221,43 +234,39 @@ namespace library
         _In_opt_ HWND hWndParent,
         _In_opt_ HMENU hMenu)
     {
-        WNDCLASSEX wcex;
+         
+        WNDCLASSEX wcex; // 윈도우 클래스 선언
         wcex.cbSize = sizeof(WNDCLASSEX);
         wcex.style = CS_HREDRAW | CS_VREDRAW;
-        wcex.lpfnWndProc = WindowProc; // 함수 포인터 저장
+        wcex.lpfnWndProc = WindowProc; // 함수 포인터. OS에서 발생하는 이벤트(키보드, 마우스 등)들이 발생할 때 알려달라는 것
         wcex.cbClsExtra = 0;
         wcex.cbWndExtra = 0;
         wcex.hInstance = hInstance;
-        wcex.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_APPLICATION));
-        wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
+        wcex.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_APPLICATION)); // 
+        wcex.hCursor = LoadCursor(nullptr, IDC_ARROW); // null 넣으면 알아서 찾음
         wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
         wcex.lpszMenuName = nullptr;
-        wcex.lpszClassName = GetWindowClassName();
+        wcex.lpszClassName = L"TutorialWindowClass";
         wcex.hIconSm = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_APPLICATION));
-        if (!RegisterClassEx(&wcex))
-            return E_FAIL;
-         
+        RegisterClassEx(&wcex);
+
+        //if (!RegisterClassEx(&wcex)) // 윈도우 클래스 등록 , 오류시 탈출
+        //    return E_FAIL;
+        ////////////// 여기를 통과를 못하는데 이유를 모르겠어////////////////
+        ////////////// 도와줘ㅓㅓㅓㅓㅓㅓㅓ//////////////////////////////////
+        
+        m_hInstance = hInstance; ////////// 얘도 안들어가........
         // Create window
-        m_hInstance = hInstance; // main에서 입력받은 hinstance 전역변수에 저장 
         RECT rc = { 0, 0, 800, 600 };
-        AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
-        m_hWnd = CreateWindow(
-            L"TutorialWindowClass", 
-            L"Game Graphics Programming Lab 01: Direct3D 11 Basics",
+        AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE); // 작업영역, 윈도우 스타일, 메뉴여부
+        m_hWnd = CreateWindow(L"TutorialWindowClass", L"Game Graphics Programming Lab 01: Direct3D 11 Basics", /// wide character 이기 때문에 L을 붙임
             WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX,
-            CW_USEDEFAULT,
-            CW_USEDEFAULT,
-            rc.right - rc.left,
-            rc.bottom - rc.top,
-            nullptr,
-            nullptr,
-            hInstance,
-            nullptr
-        );
-        if (!m_hWnd)
+            CW_USEDEFAULT, CW_USEDEFAULT, rc.right - rc.left, rc.bottom - rc.top, nullptr, nullptr, hInstance,
+            nullptr);
+        if (!m_hWnd) // 오류 검사
             return E_FAIL;
 
-        ShowWindow(m_hWnd, nCmdShow); 
+        ShowWindow(m_hWnd, nCmdShow);//창띄우기
 
         return S_OK;
     }
