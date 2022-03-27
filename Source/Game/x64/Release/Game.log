@@ -600,5 +600,55 @@ C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt\wrl\event.h(44
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt\wrl\implements.h(1615,1): warning C4365: 'return': 'LONG'에서 'unsigned long'(으)로의 변환입니다. signed 또는 unsigned가 일치하지 않습니다.
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt\wrl\implements.h(1615): message : 클래스 템플릿 멤버 함수 'unsigned long Microsoft::WRL::Details::RuntimeClassImpl<Microsoft::WRL::RuntimeClassFlags<2>,true,false,true,IUnknown>::InternalAddRef(void) throw()'을(를) 컴파일하는 중입니다.
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt\wrl\implements.h(1580): message : 컴파일되는 함수 템플릿 인스턴스화 'unsigned long Microsoft::WRL::Details::RuntimeClassImpl<Microsoft::WRL::RuntimeClassFlags<2>,true,false,true,IUnknown>::InternalAddRef(void) throw()'에 대한 참조를 확인하세요.
-Library.lib(MainWindow.obj) : error LNK2001: 확인할 수 없는 외부 기호 "public: static __int64 __cdecl library::BaseWindow<class library::MainWindow>::WindowProc(struct HWND__ *,unsigned int,unsigned __int64,__int64)" (?WindowProc@?$BaseWindow@VMainWindow@library@@@library@@SA_JPEAUHWND__@@I_K_J@Z)
-C:\Users\MHC\source\repos\GmG\Build\x64\Release\Game.exe : fatal error LNK1120: 1개의 확인할 수 없는 외부 참조입니다.
+  코드를 생성하고 있습니다.
+C:\Users\MHC\source\repos\GmG\Source\Library\Window\MainWindow.cpp(87): warning C4702: 접근할 수 없는 코드입니다.
+C:\Users\MHC\source\repos\GmG\Source\Library\Window\MainWindow.h(40): warning C4711: 자동 인라인 확장을 위해 '__cdecl library::BaseWindow<class library::MainWindow>::BaseWindow<class library::MainWindow>(void) __ptr64' 함수가 선택되었습니다.
+C:\Users\MHC\source\repos\GmG\Source\Library\Game\Game.cpp(81): warning C4711: 자동 인라인 확장을 위해 'void __cdecl library::Renderer::Render(void) __ptr64' 함수가 선택되었습니다.
+C:\Users\MHC\source\repos\GmG\Source\Library\Window\MainWindow.h(40): warning C4711: 자동 인라인 확장을 위해 '__cdecl library::BaseWindow<class library::MainWindow>::BaseWindow<class library::MainWindow>(void) __ptr64' 함수가 선택되었습니다.
+C:\Users\MHC\source\repos\GmG\Source\Library\Window\MainWindow.cpp(26): warning C4711: 자동 인라인 확장을 위해 'long __cdecl library::BaseWindow<class library::MainWindow>::initialize(struct HINSTANCE__ * __ptr64,int,wchar_t const * __ptr64,unsigned long,int,int,int,int,struct HWND__ * __ptr64,struct HMENU__ * __ptr64) __ptr64' 함수가 선택되었습니다.
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\memory(3230): warning C4710: 'void __cdecl std::default_delete<class library::Renderer>::operator()(class library::Renderer * __ptr64)const __ptr64': 함수를 인라인하지 못했습니다.
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\memory(3265): warning C4710: 'void __cdecl std::default_delete<class library::Renderer>::operator()(class library::Renderer * __ptr64)const __ptr64': 함수를 인라인하지 못했습니다.
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\memory(3416): warning C4711: 자동 인라인 확장을 위해 '__cdecl library::Renderer::Renderer(void) __ptr64' 함수가 선택되었습니다.
+C:\Users\MHC\source\repos\GmG\Source\Library\Window\MainWindow.h(40): warning C4711: 자동 인라인 확장을 위해 '__cdecl library::BaseWindow<class library::MainWindow>::BaseWindow<class library::MainWindow>(void) __ptr64' 함수가 선택되었습니다.
+C:\Users\MHC\source\repos\GmG\Source\Library\Game\Game.cpp(21): warning C4711: 자동 인라인 확장을 위해 'class std::unique_ptr<class library::MainWindow,struct std::default_delete<class library::MainWindow> > __cdecl std::make_unique<class library::MainWindow,0>(void)' 함수가 선택되었습니다.
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\memory(3416): warning C4711: 자동 인라인 확장을 위해 '__cdecl library::Renderer::Renderer(void) __ptr64' 함수가 선택되었습니다.
+C:\Users\MHC\source\repos\GmG\Source\Library\Game\Game.cpp(22): warning C4711: 자동 인라인 확장을 위해 'class std::unique_ptr<class library::Renderer,struct std::default_delete<class library::Renderer> > __cdecl std::make_unique<class library::Renderer,0>(void)' 함수가 선택되었습니다.
+C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(180): warning C5045: 컴파일러는 /Qspectre 스위치가 지정된 경우 메모리 로드를 위해 스펙터 완화를 삽입합니다.
+  C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(81) : 참고: 이 줄에서 비교에 의해 검사된 인덱스 'hr' 범위
+  C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(180) : 참고: 이 줄에서 호출 피드
+C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(178): warning C5045: 컴파일러는 /Qspectre 스위치가 지정된 경우 메모리 로드를 위해 스펙터 완화를 삽입합니다.
+  C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(165) : 참고: 이 줄에서 비교에 의해 검사된 인덱스 'hr' 범위
+  C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(178) : 참고: 이 줄에서 호출 피드
+C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(164): warning C5045: 컴파일러는 /Qspectre 스위치가 지정된 경우 메모리 로드를 위해 스펙터 완화를 삽입합니다.
+  C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(154) : 참고: 이 줄에서 비교에 의해 검사된 인덱스 'hr' 범위
+  C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(164) : 참고: 이 줄에서 호출 피드
+C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(160): warning C5045: 컴파일러는 /Qspectre 스위치가 지정된 경우 메모리 로드를 위해 스펙터 완화를 삽입합니다.
+  C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(154) : 참고: 이 줄에서 비교에 의해 검사된 인덱스 'hr' 범위
+  C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(160) : 참고: 이 줄에서 호출 피드
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt\wrl\client.h(472): warning C5045: 컴파일러는 /Qspectre 스위치가 지정된 경우 메모리 로드를 위해 스펙터 완화를 삽입합니다.
+  C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(126) : 참고: 이 줄에서 비교에 의해 검사된 인덱스 'hr' 범위
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt\wrl\client.h(472) : 참고: 이 줄에서 호출 피드
+C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(82): warning C5045: 컴파일러는 /Qspectre 스위치가 지정된 경우 메모리 로드를 위해 스펙터 완화를 삽입합니다.
+  C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(81) : 참고: 이 줄에서 비교에 의해 검사된 인덱스 'hr' 범위
+  C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(82) : 참고: 이 줄에서 호출 피드
+C:\Users\MHC\source\repos\GmG\Source\Library\Window\MainWindow.h(40): warning C4711: 자동 인라인 확장을 위해 '__cdecl library::BaseWindow<class library::MainWindow>::BaseWindow<class library::MainWindow>(void) __ptr64' 함수가 선택되었습니다.
+C:\Users\MHC\source\repos\GmG\Source\Library\Game\Game.cpp(21): warning C4711: 자동 인라인 확장을 위해 'class std::unique_ptr<class library::MainWindow,struct std::default_delete<class library::MainWindow> > __cdecl std::make_unique<class library::MainWindow,0>(void)' 함수가 선택되었습니다.
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\memory(3416): warning C4711: 자동 인라인 확장을 위해 '__cdecl library::Renderer::Renderer(void) __ptr64' 함수가 선택되었습니다.
+C:\Users\MHC\source\repos\GmG\Source\Library\Game\Game.cpp(22): warning C4711: 자동 인라인 확장을 위해 'class std::unique_ptr<class library::Renderer,struct std::default_delete<class library::Renderer> > __cdecl std::make_unique<class library::Renderer,0>(void)' 함수가 선택되었습니다.
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\memory(3416): warning C4711: 자동 인라인 확장을 위해 '__cdecl library::Game::Game(wchar_t const * __ptr64) __ptr64' 함수가 선택되었습니다.
+C:\Users\MHC\source\repos\GmG\Source\Library\Game\Game.cpp(50): warning C4711: 자동 인라인 확장을 위해 'struct HWND__ * __ptr64 __cdecl library::BaseWindow<class library::MainWindow>::GetWindow(void)const __ptr64' 함수가 선택되었습니다.
+C:\Users\MHC\source\repos\GmG\Source\Library\Window\MainWindow.h(40): warning C4711: 자동 인라인 확장을 위해 '__cdecl library::BaseWindow<class library::MainWindow>::BaseWindow<class library::MainWindow>(void) __ptr64' 함수가 선택되었습니다.
+C:\Users\MHC\source\repos\GmG\Source\Library\Game\Game.cpp(21): warning C4711: 자동 인라인 확장을 위해 'class std::unique_ptr<class library::MainWindow,struct std::default_delete<class library::MainWindow> > __cdecl std::make_unique<class library::MainWindow,0>(void)' 함수가 선택되었습니다.
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\memory(3416): warning C4711: 자동 인라인 확장을 위해 '__cdecl library::Renderer::Renderer(void) __ptr64' 함수가 선택되었습니다.
+C:\Users\MHC\source\repos\GmG\Source\Library\Game\Game.cpp(22): warning C4711: 자동 인라인 확장을 위해 'class std::unique_ptr<class library::Renderer,struct std::default_delete<class library::Renderer> > __cdecl std::make_unique<class library::Renderer,0>(void)' 함수가 선택되었습니다.
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\memory(3416): warning C4711: 자동 인라인 확장을 위해 '__cdecl library::Game::Game(wchar_t const * __ptr64) __ptr64' 함수가 선택되었습니다.
+C:\Users\MHC\source\repos\GmG\Source\Game\Main.cpp(45): warning C4711: 자동 인라인 확장을 위해 'class std::unique_ptr<class library::Game,struct std::default_delete<class library::Game> > __cdecl std::make_unique<class library::Game,wchar_t const (& __ptr64)[57],0>(wchar_t const (& __ptr64)[57])' 함수가 선택되었습니다.
+C:\Users\MHC\source\repos\GmG\Source\Library\Game\Game.cpp(50): warning C4711: 자동 인라인 확장을 위해 'struct HWND__ * __ptr64 __cdecl library::BaseWindow<class library::MainWindow>::GetWindow(void)const __ptr64' 함수가 선택되었습니다.
+C:\Users\MHC\source\repos\GmG\Source\Game\Main.cpp(47): warning C4711: 자동 인라인 확장을 위해 'long __cdecl library::Game::Initialize(struct HINSTANCE__ * __ptr64,int) __ptr64' 함수가 선택되었습니다.
+C:\Users\MHC\source\repos\GmG\Source\Library\Game\Game.cpp(81): warning C4711: 자동 인라인 확장을 위해 'void __cdecl library::Renderer::Render(void) __ptr64' 함수가 선택되었습니다.
+C:\Users\MHC\source\repos\GmG\Source\Game\Main.cpp(52): warning C4711: 자동 인라인 확장을 위해 'int __cdecl library::Game::Run(void) __ptr64' 함수가 선택되었습니다.
+  171 of 171 functions (100.0%) were compiled.
+    92 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  코드를 생성했습니다.
+  Game.vcxproj -> C:\Users\MHC\source\repos\GmG\Build\x64\Release\Game.exe

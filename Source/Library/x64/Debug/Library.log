@@ -1814,7 +1814,6 @@ C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.2
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\atomic(325,9): warning C4365: '인수': 'long'에서 'unsigned int'(으)로의 변환입니다. signed 또는 unsigned가 일치하지 않습니다.
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\atomic(388,9): warning C4365: '인수': 'long'에서 'unsigned int'(으)로의 변환입니다. signed 또는 unsigned가 일치하지 않습니다.
 C:\Users\MHC\source\repos\GmG\Source\Library\Window\BaseWindow.h(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
-C:\Users\MHC\source\repos\GmG\Source\Library\Window\MainWindow.cpp(87,9): warning C4060: switch문에 'case' 또는 'default' 레이블이 없습니다.
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt\wrl\implements.h(1623,1): warning C4365: '초기화 중': 'LONG'에서 'unsigned long'(으)로의 변환입니다. signed 또는 unsigned가 일치하지 않습니다.
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt\wrl\implements.h(1623): message : 클래스 템플릿 멤버 함수 'unsigned long Microsoft::WRL::Details::RuntimeClassImpl<Microsoft::WRL::RuntimeClassFlags<2>,true,false,true,IUnknown>::InternalRelease(void) noexcept'을(를) 컴파일하는 중입니다.
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt\wrl\implements.h(1585): message : 컴파일되는 함수 템플릿 인스턴스화 'unsigned long Microsoft::WRL::Details::RuntimeClassImpl<Microsoft::WRL::RuntimeClassFlags<2>,true,false,true,IUnknown>::InternalRelease(void) noexcept'에 대한 참조를 확인하세요.
@@ -1823,53 +1822,45 @@ C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt\wrl\event.h(44
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt\wrl\implements.h(1619,1): warning C4365: 'return': 'LONG'에서 'unsigned long'(으)로의 변환입니다. signed 또는 unsigned가 일치하지 않습니다.
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt\wrl\implements.h(1615): message : 클래스 템플릿 멤버 함수 'unsigned long Microsoft::WRL::Details::RuntimeClassImpl<Microsoft::WRL::RuntimeClassFlags<2>,true,false,true,IUnknown>::InternalAddRef(void) noexcept'을(를) 컴파일하는 중입니다.
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt\wrl\implements.h(1580): message : 컴파일되는 함수 템플릿 인스턴스화 'unsigned long Microsoft::WRL::Details::RuntimeClassImpl<Microsoft::WRL::RuntimeClassFlags<2>,true,false,true,IUnknown>::InternalAddRef(void) noexcept'에 대한 참조를 확인하세요.
-C:\Users\MHC\source\repos\GmG\Source\Library\Window\BaseWindow.h(244,1): warning C4302: '형식 캐스트': 'LPWSTR'에서 'WORD'(으)로 잘립니다.
-C:\Users\MHC\source\repos\GmG\Source\Library\Window\BaseWindow.h(236): message : 클래스 템플릿 멤버 함수 'HRESULT library::BaseWindow<library::MainWindow>::initialize(HINSTANCE,INT,PCWSTR,DWORD,INT,INT,INT,INT,HWND,HMENU)'을(를) 컴파일하는 중입니다.
-C:\Users\MHC\source\repos\GmG\Source\Library\Window\MainWindow.cpp(26): message : 컴파일되는 함수 템플릿 인스턴스화 'HRESULT library::BaseWindow<library::MainWindow>::initialize(HINSTANCE,INT,PCWSTR,DWORD,INT,INT,INT,INT,HWND,HMENU)'에 대한 참조를 확인하세요.
+C:\Users\MHC\source\repos\GmG\Source\Library\Window\BaseWindow.h(213,24): warning C4100: 'hMenu': 참조되지 않은 정식 매개 변수입니다.
+C:\Users\MHC\source\repos\GmG\Source\Library\Window\BaseWindow.h(214): message : 클래스 템플릿 멤버 함수 'HRESULT library::BaseWindow<library::MainWindow>::initialize(HINSTANCE,INT,PCWSTR,DWORD,INT,INT,INT,INT,HWND,HMENU)'을(를) 컴파일하는 중입니다.
+C:\Users\MHC\source\repos\GmG\Source\Library\Window\MainWindow.cpp(23): message : 컴파일되는 함수 템플릿 인스턴스화 'HRESULT library::BaseWindow<library::MainWindow>::initialize(HINSTANCE,INT,PCWSTR,DWORD,INT,INT,INT,INT,HWND,HMENU)'에 대한 참조를 확인하세요.
 C:\Users\MHC\source\repos\GmG\Source\Library\Window\MainWindow.h(38): message : 컴파일되는 클래스 템플릿 인스턴스화 'library::BaseWindow<library::MainWindow>'에 대한 참조를 확인하세요.
-C:\Users\MHC\source\repos\GmG\Source\Library\Window\BaseWindow.h(249,1): warning C4302: '형식 캐스트': 'LPWSTR'에서 'WORD'(으)로 잘립니다.
-C:\Users\MHC\source\repos\GmG\Source\Library\Window\BaseWindow.h(235,24): warning C4100: 'hMenu': 참조되지 않은 정식 매개 변수입니다.
-C:\Users\MHC\source\repos\GmG\Source\Library\Window\BaseWindow.h(234,23): warning C4100: 'hWndParent': 참조되지 않은 정식 매개 변수입니다.
-C:\Users\MHC\source\repos\GmG\Source\Library\Window\BaseWindow.h(233,22): warning C4100: 'nHeight': 참조되지 않은 정식 매개 변수입니다.
-C:\Users\MHC\source\repos\GmG\Source\Library\Window\BaseWindow.h(232,22): warning C4100: 'nWidth': 참조되지 않은 정식 매개 변수입니다.
-C:\Users\MHC\source\repos\GmG\Source\Library\Window\BaseWindow.h(231,22): warning C4100: 'y': 참조되지 않은 정식 매개 변수입니다.
-C:\Users\MHC\source\repos\GmG\Source\Library\Window\BaseWindow.h(230,22): warning C4100: 'x': 참조되지 않은 정식 매개 변수입니다.
-C:\Users\MHC\source\repos\GmG\Source\Library\Window\BaseWindow.h(229,20): warning C4100: 'dwStyle': 참조되지 않은 정식 매개 변수입니다.
-C:\Users\MHC\source\repos\GmG\Source\Library\Window\BaseWindow.h(228,21): warning C4100: 'pszWindowName': 참조되지 않은 정식 매개 변수입니다.
+C:\Users\MHC\source\repos\GmG\Source\Library\Window\BaseWindow.h(212,23): warning C4100: 'hWndParent': 참조되지 않은 정식 매개 변수입니다.
+C:\Users\MHC\source\repos\GmG\Source\Library\Window\BaseWindow.h(211,22): warning C4100: 'nHeight': 참조되지 않은 정식 매개 변수입니다.
+C:\Users\MHC\source\repos\GmG\Source\Library\Window\BaseWindow.h(210,22): warning C4100: 'nWidth': 참조되지 않은 정식 매개 변수입니다.
+C:\Users\MHC\source\repos\GmG\Source\Library\Window\BaseWindow.h(209,22): warning C4100: 'y': 참조되지 않은 정식 매개 변수입니다.
+C:\Users\MHC\source\repos\GmG\Source\Library\Window\BaseWindow.h(208,22): warning C4100: 'x': 참조되지 않은 정식 매개 변수입니다.
+C:\Users\MHC\source\repos\GmG\Source\Library\Window\BaseWindow.h(207,20): warning C4100: 'dwStyle': 참조되지 않은 정식 매개 변수입니다.
   코드를 생성하고 있습니다...
-C:\Users\MHC\source\repos\GmG\Source\Library\Window\MainWindow.cpp(68): warning C4702: 접근할 수 없는 코드입니다.
-C:\Users\MHC\source\repos\GmG\Source\Library\Window\MainWindow.cpp(71): warning C4702: 접근할 수 없는 코드입니다.
-C:\Users\MHC\source\repos\GmG\Source\Library\Window\MainWindow.cpp(77): warning C4702: 접근할 수 없는 코드입니다.
-C:\Users\MHC\source\repos\GmG\Source\Library\Window\MainWindow.cpp(84): warning C4702: 접근할 수 없는 코드입니다.
-C:\Users\MHC\source\repos\GmG\Source\Library\Window\MainWindow.cpp(86): warning C4702: 접근할 수 없는 코드입니다.
-C:\Users\MHC\source\repos\GmG\Source\Library\Window\MainWindow.cpp(88): warning C4715: 'library::MainWindow::HandleMessage': 모든 제어 경로에서 값을 반환하지는 않습니다.
-C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(166): warning C5045: 컴파일러는 /Qspectre 스위치가 지정된 경우 메모리 로드를 위해 스펙터 완화를 삽입합니다.
-  C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(165) : 참고: 이 줄에서 비교에 의해 검사된 인덱스 'hr' 범위
-  C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(166) : 참고: 이 줄에서 호출 피드
-C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(162): warning C5045: 컴파일러는 /Qspectre 스위치가 지정된 경우 메모리 로드를 위해 스펙터 완화를 삽입합니다.
-  C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(161) : 참고: 이 줄에서 비교에 의해 검사된 인덱스 'hr' 범위
-  C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(162) : 참고: 이 줄에서 호출 피드
-C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(155): warning C5045: 컴파일러는 /Qspectre 스위치가 지정된 경우 메모리 로드를 위해 스펙터 완화를 삽입합니다.
-  C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(154) : 참고: 이 줄에서 비교에 의해 검사된 인덱스 'hr' 범위
-  C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(155) : 참고: 이 줄에서 호출 피드
-C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(128): warning C5045: 컴파일러는 /Qspectre 스위치가 지정된 경우 메모리 로드를 위해 스펙터 완화를 삽입합니다.
-  C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(126) : 참고: 이 줄에서 비교에 의해 검사된 인덱스 'hr' 범위
-  C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(128) : 참고: 이 줄에서 호출 피드
-C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(113): warning C5045: 컴파일러는 /Qspectre 스위치가 지정된 경우 메모리 로드를 위해 스펙터 완화를 삽입합니다.
-  C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(111) : 참고: 이 줄에서 비교에 의해 검사된 인덱스 'hr' 범위
-  C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(113) : 참고: 이 줄에서 호출 피드
-C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(102): warning C5045: 컴파일러는 /Qspectre 스위치가 지정된 경우 메모리 로드를 위해 스펙터 완화를 삽입합니다.
-  C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(101) : 참고: 이 줄에서 비교에 의해 검사된 인덱스 'hr' 범위
-  C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(102) : 참고: 이 줄에서 호출 피드
-C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(82): warning C5045: 컴파일러는 /Qspectre 스위치가 지정된 경우 메모리 로드를 위해 스펙터 완화를 삽입합니다.
-  C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(81) : 참고: 이 줄에서 비교에 의해 검사된 인덱스 'hr' 범위
-  C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(82) : 참고: 이 줄에서 호출 피드
-C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(74): warning C5045: 컴파일러는 /Qspectre 스위치가 지정된 경우 메모리 로드를 위해 스펙터 완화를 삽입합니다.
-  C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(65) : 참고: 이 줄에서 비교에 의해 검사된 인덱스 'driverTypeIndex' 범위
-  C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(74) : 참고: 이 줄에서 호출 피드
+C:\Users\MHC\source\repos\GmG\Source\Library\Window\MainWindow.cpp(78): warning C4702: 접근할 수 없는 코드입니다.
+C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(160): warning C5045: 컴파일러는 /Qspectre 스위치가 지정된 경우 메모리 로드를 위해 스펙터 완화를 삽입합니다.
+  C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(159) : 참고: 이 줄에서 비교에 의해 검사된 인덱스 'hr' 범위
+  C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(160) : 참고: 이 줄에서 호출 피드
+C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(156): warning C5045: 컴파일러는 /Qspectre 스위치가 지정된 경우 메모리 로드를 위해 스펙터 완화를 삽입합니다.
+  C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(155) : 참고: 이 줄에서 비교에 의해 검사된 인덱스 'hr' 범위
+  C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(156) : 참고: 이 줄에서 호출 피드
+C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(149): warning C5045: 컴파일러는 /Qspectre 스위치가 지정된 경우 메모리 로드를 위해 스펙터 완화를 삽입합니다.
+  C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(148) : 참고: 이 줄에서 비교에 의해 검사된 인덱스 'hr' 범위
+  C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(149) : 참고: 이 줄에서 호출 피드
+C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(122): warning C5045: 컴파일러는 /Qspectre 스위치가 지정된 경우 메모리 로드를 위해 스펙터 완화를 삽입합니다.
+  C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(120) : 참고: 이 줄에서 비교에 의해 검사된 인덱스 'hr' 범위
+  C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(122) : 참고: 이 줄에서 호출 피드
+C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(107): warning C5045: 컴파일러는 /Qspectre 스위치가 지정된 경우 메모리 로드를 위해 스펙터 완화를 삽입합니다.
+  C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(105) : 참고: 이 줄에서 비교에 의해 검사된 인덱스 'hr' 범위
+  C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(107) : 참고: 이 줄에서 호출 피드
+C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(96): warning C5045: 컴파일러는 /Qspectre 스위치가 지정된 경우 메모리 로드를 위해 스펙터 완화를 삽입합니다.
+  C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(95) : 참고: 이 줄에서 비교에 의해 검사된 인덱스 'hr' 범위
+  C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(96) : 참고: 이 줄에서 호출 피드
+C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(76): warning C5045: 컴파일러는 /Qspectre 스위치가 지정된 경우 메모리 로드를 위해 스펙터 완화를 삽입합니다.
+  C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(75) : 참고: 이 줄에서 비교에 의해 검사된 인덱스 'hr' 범위
+  C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(76) : 참고: 이 줄에서 호출 피드
 C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(68): warning C5045: 컴파일러는 /Qspectre 스위치가 지정된 경우 메모리 로드를 위해 스펙터 완화를 삽입합니다.
-  C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(65) : 참고: 이 줄에서 비교에 의해 검사된 인덱스 'driverTypeIndex' 범위
+  C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(59) : 참고: 이 줄에서 비교에 의해 검사된 인덱스 'driverTypeIndex' 범위
   C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(68) : 참고: 이 줄에서 호출 피드
+C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(62): warning C5045: 컴파일러는 /Qspectre 스위치가 지정된 경우 메모리 로드를 위해 스펙터 완화를 삽입합니다.
+  C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(59) : 참고: 이 줄에서 비교에 의해 검사된 인덱스 'driverTypeIndex' 범위
+  C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(62) : 참고: 이 줄에서 호출 피드
   Library.vcxproj -> C:\Users\MHC\source\repos\GmG\Build\x64\Debug\Libraryd.lib
   하위 디렉터리 또는 파일 C:\Users\MHC\source\repos\GmG\Build\..\Library\x64\Debug이(가) 이미 있습니다.
   C:\Users\MHC\source\repos\GmG\Build\x64\Debug\Game.exe

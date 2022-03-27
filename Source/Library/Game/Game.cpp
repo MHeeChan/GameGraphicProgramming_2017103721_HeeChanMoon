@@ -16,7 +16,12 @@ namespace library
 	/*--------------------------------------------------------------------
 	  TODO: Game::Game definition (remove the comment)
 	--------------------------------------------------------------------*/
-	Game::Game(_In_ PCWSTR pszGameName) :m_pszGameName(pszGameName) {}
+	Game::Game(_In_ PCWSTR pszGameName)
+	{
+		m_mainWindow = std::make_unique<MainWindow>();
+		m_renderer = std::make_unique<Renderer>();
+		m_pszGameName = pszGameName;
+	}
 
 	/*M+M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M
 	  Method:   Game::Initialize
@@ -34,19 +39,15 @@ namespace library
 	  Returns:  HRESULT
 				Status code
 	M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M-M*/
-	/*--------------------------------------------------------------------
-	  TODO: Game::Initialize definition (remove the comment)
-	--------------------------------------------------------------------*/
 	HRESULT Game::Initialize(_In_ HINSTANCE hInstance, _In_ INT nCmdShow)
 	{
 		// m_mainWindow -> MainWindow::MainWindow();
-		m_mainWindow->MainWindow::Initialize(hInstance, nCmdShow, m_pszGameName);
-		//m_renderer -> Renderer::Renderer();
-		m_renderer->Renderer::Initialize(m_mainWindow->GetWindow());
-		// MainWindow.cpp 에서는 BaseWindow 에서 정의한 GetWindow()를 호출하는데 Game.cpp 안에서는 호출을 못하고 WinUser.h 안에 있는 GetWindow를 호출합니다.
-
+		m_mainWindow->Initialize(hInstance, nCmdShow, m_pszGameName);
+		//HWND hWnd = m_mainWindow->GetWindow();
+		m_renderer->Initialize(m_mainWindow->GetWindow());
+		
 		//initialize
-		return TRUE;
+		return S_OK;
 		
 	}
 
@@ -58,9 +59,6 @@ namespace library
 	  Returns:  INT
 				  Status code to return to the operating system
 	M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M-M*/
-	/*--------------------------------------------------------------------
-	  TODO: Game::Run definition (remove the comment)
-	--------------------------------------------------------------------*/
 	INT Game::Run()
 	{
 		MSG msg = {0};
@@ -88,9 +86,6 @@ namespace library
 	  Returns:  PCWSTR
 				  Name of the game
 	M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M-M*/
-	/*--------------------------------------------------------------------
-	  TODO: Game::GetGameName definition (remove the comment)
-	--------------------------------------------------------------------*/
 	PCWSTR Game::GetGameName() const
 	{
 		return m_pszGameName;

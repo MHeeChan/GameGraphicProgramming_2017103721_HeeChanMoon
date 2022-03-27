@@ -1804,22 +1804,20 @@ C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt\wrl\event.h(44
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt\wrl\implements.h(1619,1): warning C4365: 'return': 'LONG'에서 'unsigned long'(으)로의 변환입니다. signed 또는 unsigned가 일치하지 않습니다.
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt\wrl\implements.h(1615): message : 클래스 템플릿 멤버 함수 'unsigned long Microsoft::WRL::Details::RuntimeClassImpl<Microsoft::WRL::RuntimeClassFlags<2>,true,false,true,IUnknown>::InternalAddRef(void) noexcept'을(를) 컴파일하는 중입니다.
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt\wrl\implements.h(1580): message : 컴파일되는 함수 템플릿 인스턴스화 'unsigned long Microsoft::WRL::Details::RuntimeClassImpl<Microsoft::WRL::RuntimeClassFlags<2>,true,false,true,IUnknown>::InternalAddRef(void) noexcept'에 대한 참조를 확인하세요.
-C:\Users\MHC\source\repos\GmG\Source\Library\Window\BaseWindow.h(230,1): warning C4302: '형식 캐스트': 'LPWSTR'에서 'WORD'(으)로 잘립니다.
-C:\Users\MHC\source\repos\GmG\Source\Library\Window\BaseWindow.h(223): message : 클래스 템플릿 멤버 함수 'HRESULT library::BaseWindow<library::MainWindow>::initialize(HINSTANCE,INT,PCWSTR,DWORD,INT,INT,INT,INT,HWND,HMENU)'을(를) 컴파일하는 중입니다.
+C:\Users\MHC\source\repos\GmG\Source\Library\Window\BaseWindow.h(213,24): warning C4100: 'hMenu': 참조되지 않은 정식 매개 변수입니다.
+C:\Users\MHC\source\repos\GmG\Source\Library\Window\BaseWindow.h(214): message : 클래스 템플릿 멤버 함수 'HRESULT library::BaseWindow<library::MainWindow>::initialize(HINSTANCE,INT,PCWSTR,DWORD,INT,INT,INT,INT,HWND,HMENU)'을(를) 컴파일하는 중입니다.
 C:\Users\MHC\source\repos\GmG\Source\Library\Window\MainWindow.cpp(26): message : 컴파일되는 함수 템플릿 인스턴스화 'HRESULT library::BaseWindow<library::MainWindow>::initialize(HINSTANCE,INT,PCWSTR,DWORD,INT,INT,INT,INT,HWND,HMENU)'에 대한 참조를 확인하세요.
 C:\Users\MHC\source\repos\GmG\Source\Library\Window\MainWindow.h(38): message : 컴파일되는 클래스 템플릿 인스턴스화 'library::BaseWindow<library::MainWindow>'에 대한 참조를 확인하세요.
-C:\Users\MHC\source\repos\GmG\Source\Library\Window\BaseWindow.h(235,1): warning C4302: '형식 캐스트': 'LPWSTR'에서 'WORD'(으)로 잘립니다.
-C:\Users\MHC\source\repos\GmG\Source\Library\Window\BaseWindow.h(222,24): warning C4100: 'hMenu': 참조되지 않은 정식 매개 변수입니다.
-C:\Users\MHC\source\repos\GmG\Source\Library\Window\BaseWindow.h(221,23): warning C4100: 'hWndParent': 참조되지 않은 정식 매개 변수입니다.
-C:\Users\MHC\source\repos\GmG\Source\Library\Window\BaseWindow.h(220,22): warning C4100: 'nHeight': 참조되지 않은 정식 매개 변수입니다.
-C:\Users\MHC\source\repos\GmG\Source\Library\Window\BaseWindow.h(219,22): warning C4100: 'nWidth': 참조되지 않은 정식 매개 변수입니다.
-C:\Users\MHC\source\repos\GmG\Source\Library\Window\BaseWindow.h(218,22): warning C4100: 'y': 참조되지 않은 정식 매개 변수입니다.
-C:\Users\MHC\source\repos\GmG\Source\Library\Window\BaseWindow.h(217,22): warning C4100: 'x': 참조되지 않은 정식 매개 변수입니다.
-C:\Users\MHC\source\repos\GmG\Source\Library\Window\BaseWindow.h(216,20): warning C4100: 'dwStyle': 참조되지 않은 정식 매개 변수입니다.
-C:\Users\MHC\source\repos\GmG\Source\Library\Window\BaseWindow.h(215,21): warning C4100: 'pszWindowName': 참조되지 않은 정식 매개 변수입니다.
+C:\Users\MHC\source\repos\GmG\Source\Library\Window\BaseWindow.h(212,23): warning C4100: 'hWndParent': 참조되지 않은 정식 매개 변수입니다.
+C:\Users\MHC\source\repos\GmG\Source\Library\Window\BaseWindow.h(211,22): warning C4100: 'nHeight': 참조되지 않은 정식 매개 변수입니다.
+C:\Users\MHC\source\repos\GmG\Source\Library\Window\BaseWindow.h(210,22): warning C4100: 'nWidth': 참조되지 않은 정식 매개 변수입니다.
+C:\Users\MHC\source\repos\GmG\Source\Library\Window\BaseWindow.h(209,22): warning C4100: 'y': 참조되지 않은 정식 매개 변수입니다.
+C:\Users\MHC\source\repos\GmG\Source\Library\Window\BaseWindow.h(208,22): warning C4100: 'x': 참조되지 않은 정식 매개 변수입니다.
+C:\Users\MHC\source\repos\GmG\Source\Library\Window\BaseWindow.h(207,20): warning C4100: 'dwStyle': 참조되지 않은 정식 매개 변수입니다.
   Library.vcxproj -> C:\Users\MHC\source\repos\GmG\Build\x64\Release\Library.lib
   하위 디렉터리 또는 파일 C:\Users\MHC\source\repos\GmG\Build\..\Library\x64\Release이(가) 이미 있습니다.
+  C:\Users\MHC\source\repos\GmG\Build\x64\Release\Game.exe
   C:\Users\MHC\source\repos\GmG\Build\x64\Release\Game.pdb
   C:\Users\MHC\source\repos\GmG\Build\x64\Release\Library.lib
   C:\Users\MHC\source\repos\GmG\Build\x64\Release\Library.pdb
-          3개 파일이 복사되었습니다.
+          4개 파일이 복사되었습니다.

@@ -1,3 +1,4 @@
+
 /*+===================================================================
   File:      BASEWINDOW.H
 
@@ -11,6 +12,7 @@
 #pragma once
 
 #include "Common.h"
+#include <cassert>
 
 namespace library
 {
@@ -100,16 +102,15 @@ namespace library
     --------------------------------------------------------------------*/
     template <class DerivedType>
     LRESULT BaseWindow<DerivedType>::WindowProc(_In_ HWND hWnd, _In_ UINT uMsg, _In_ WPARAM wParam, _In_ LPARAM lParam)
-    { 
-        /*
+    {
         DerivedType* pThis = nullptr;
 
         if (uMsg == WM_NCCREATE)
         {
             CREATESTRUCT* pCreate = reinterpret_cast<CREATESTRUCT*>(lParam);
             pThis = reinterpret_cast<DerivedType*>(pCreate->lpCreateParams);
-            pThis->m_hWnd = hWnd;
             SetWindowLongPtr(hWnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(pThis));
+            pThis->m_hWnd = hWnd;
         }
         else
         {
@@ -121,31 +122,6 @@ namespace library
             return pThis->HandleMessage(uMsg, wParam, lParam);
         }
         return DefWindowProc(hWnd, uMsg, wParam, lParam);
-        */
-
-        DerivedType* pThis = NULL;
-
-        if (uMsg == WM_NCCREATE)
-        {
-            CREATESTRUCT* pCreate = (CREATESTRUCT*)lParam;
-            pThis = (DerivedType*)pCreate->lpCreateParams;
-            SetWindowLongPtr(hWnd, GWLP_USERDATA, (LONG_PTR)pThis);
-
-            pThis->m_hWnd = hWnd;
-        }
-        else
-        {
-            pThis = (DerivedType*)GetWindowLongPtr(hWnd, GWLP_USERDATA);
-        }
-        if (pThis)
-        {
-            return pThis->HandleMessage(uMsg, wParam, lParam);
-        }
-        else
-        {
-            return DefWindowProc(hWnd, uMsg, wParam, lParam);
-        }
-
     }
 
     /*M+M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M
@@ -162,7 +138,9 @@ namespace library
     BaseWindow<DerivedType>::BaseWindow()
     {
         m_hInstance = nullptr;
-        return;
+        m_hWnd = nullptr;
+        m_pszWindowName = (L"WindowName");
+
     }
 
     /*M+M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M
@@ -222,7 +200,7 @@ namespace library
     /*--------------------------------------------------------------------
       TODO: BaseWindow<DerivedType>::initialize definition (remove the comment)
     --------------------------------------------------------------------*/
-    template <class DerivedType> 
+    template <class DerivedType>
     HRESULT BaseWindow<DerivedType>::initialize(_In_ HINSTANCE hInstance, // register class
         _In_ INT nCmdShow,
         _In_ PCWSTR pszWindowName,
@@ -234,7 +212,7 @@ namespace library
         _In_opt_ HWND hWndParent,
         _In_opt_ HMENU hMenu)
     {
-         
+        m_pszWindowName = pszWindowName;
         WNDCLASSEX wcex; // 윈도우 클래스 선언
         wcex.cbSize = sizeof(WNDCLASSEX);
         wcex.style = CS_HREDRAW | CS_VREDRAW;
@@ -242,29 +220,49 @@ namespace library
         wcex.cbClsExtra = 0;
         wcex.cbWndExtra = 0;
         wcex.hInstance = hInstance;
-        wcex.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_APPLICATION)); // 
+        wcex.hIcon = LoadIcon(hInstance, (LPCTSTR)IDI_TUTORIAL); // 
         wcex.hCursor = LoadCursor(nullptr, IDC_ARROW); // null 넣으면 알아서 찾음
         wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
         wcex.lpszMenuName = nullptr;
-        wcex.lpszClassName = L"TutorialWindowClass";
-        wcex.hIconSm = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_APPLICATION));
-        RegisterClassEx(&wcex);
-
-        //if (!RegisterClassEx(&wcex)) // 윈도우 클래스 등록 , 오류시 탈출
-        //    return E_FAIL;
-        ////////////// 여기를 통과를 못하는데 이유를 모르겠어////////////////
-        ////////////// 도와줘ㅓㅓㅓㅓㅓㅓㅓ//////////////////////////////////
-        
-        m_hInstance = hInstance; ////////// 얘도 안들어가........
-        // Create window
+        wcex.lpszClassName = GetWindowClassName();
+        wcex.hIconSm = LoadIcon(wcex.hInstance, (LPCTSTR)IDI_TUTORIAL);
+ 
+        if (!RegisterClassEx(&wcex)) // 윈도우 클래스 등록 , 오류시 탈출
+            return E_FAIL;
+            
+        m_hInstance = hInstance;
         RECT rc = { 0, 0, 800, 600 };
         AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE); // 작업영역, 윈도우 스타일, 메뉴여부
-        m_hWnd = CreateWindow(L"TutorialWindowClass", L"Game Graphics Programming Lab 01: Direct3D 11 Basics", /// wide character 이기 때문에 L을 붙임
+        m_hWnd = CreateWindow(GetWindowClassName(), pszWindowName, /// wide character 이기 때문에 L을 붙임
             WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX,
-            CW_USEDEFAULT, CW_USEDEFAULT, rc.right - rc.left, rc.bottom - rc.top, nullptr, nullptr, hInstance,
-            nullptr);
-        if (!m_hWnd) // 오류 검사
+            CW_USEDEFAULT, CW_USEDEFAULT, rc.right - rc.left, rc.bottom - rc.top, nullptr, nullptr, hInstance, this);
+
+
+        if(m_hWnd==NULL)
+        {
+            DWORD dwError = GetLastError();
+            MessageBox(
+                nullptr,
+                L"Call to RegisterClassEx failed!",
+                L"Game Graphics Programming",
+                NULL
+            );
+            if (dwError != ERROR_CLASS_ALREADY_EXISTS)
+            {
+                return HRESULT_FROM_WIN32(dwError);
+            }
             return E_FAIL;
+        }
+        
+
+
+      
+        assert(m_hWnd);
+        if (!m_hWnd)
+        {// 오류 검사
+            return E_FAIL;
+        }
+
 
         ShowWindow(m_hWnd, nCmdShow);//창띄우기
 

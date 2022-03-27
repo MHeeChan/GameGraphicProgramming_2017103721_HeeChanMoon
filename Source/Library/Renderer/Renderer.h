@@ -46,8 +46,8 @@ namespace library
         void Render();
 
     private:
-        //D3D_DRIVER_TYPE m_driverType;
-        //D3D_FEATURE_LEVEL m_featureLevel;
+        D3D_DRIVER_TYPE m_driverType;
+        D3D_FEATURE_LEVEL m_featureLevel;
         ComPtr<ID3D11Device> m_d3dDevice;
         ComPtr<ID3D11Device1> m_d3dDevice1;
         ComPtr<ID3D11DeviceContext> m_immediateContext;
@@ -55,10 +55,5 @@ namespace library
         ComPtr<IDXGISwapChain> m_swapChain;
         ComPtr<IDXGISwapChain1> m_swapChain1;
         ComPtr<ID3D11RenderTargetView> m_renderTargetView;
-
-        D3D_DRIVER_TYPE         g_driverType = D3D_DRIVER_TYPE_NULL;
-        D3D_FEATURE_LEVEL       g_featureLevel = D3D_FEATURE_LEVEL_11_0;
-
-
     };
 }
