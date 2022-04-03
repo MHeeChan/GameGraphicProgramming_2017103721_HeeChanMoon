@@ -107,14 +107,15 @@ namespace library
                 hr = m_immediateContext.As(&m_immediateContext1);
             }
 
-            DXGI_SWAP_CHAIN_DESC1 sd = {};
-            sd.Width = width;
-            sd.Height = height;
-            sd.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-            sd.SampleDesc.Count = 1;
-            sd.SampleDesc.Quality = 0;
-            sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-            sd.BufferCount = 1;
+            DXGI_SWAP_CHAIN_DESC1 sd =
+            {
+            .Width = width,
+            .Height = height,
+            .Format = DXGI_FORMAT_R8G8B8A8_UNORM,
+            .SampleDesc = {.Count = 1, .Quality = 0},
+            .BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT,
+            .BufferCount = 1
+            };
 
             hr = dxgiFactory2->CreateSwapChainForHwnd(m_d3dDevice.Get(), hWnd, &sd, nullptr, nullptr, m_swapChain1.GetAddressOf());
             if (SUCCEEDED(hr))
@@ -125,21 +126,23 @@ namespace library
         else
         {
             // DirectX 11.0 systems
-            DXGI_SWAP_CHAIN_DESC sd = {};
-            sd.BufferCount = 1;
-            sd.BufferDesc.Width = width;
-            sd.BufferDesc.Height = height;
-            sd.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-            sd.BufferDesc.RefreshRate.Numerator = 60;
-            sd.BufferDesc.RefreshRate.Denominator = 1;
-            sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-            sd.OutputWindow = hWnd;
-            sd.SampleDesc.Count = 1;
-            sd.SampleDesc.Quality = 0;
-            sd.Windowed = TRUE;
-
+            DXGI_SWAP_CHAIN_DESC sd = {
+            .BufferDesc = {
+                    .Width = width,
+                    .Height = height,
+                    .RefreshRate = {.Numerator = 60, .Denominator = 1},
+                    .Format = DXGI_FORMAT_R8G8B8A8_UNORM
+             } ,
+            .SampleDesc = {.Count = 1,  .Quality = 0},
+            .BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT,
+            .BufferCount = 1,
+            .OutputWindow = hWnd,
+            .Windowed = TRUE
+            };
+        
             hr = dxgiFactory->CreateSwapChain(m_d3dDevice.Get(), &sd, m_swapChain.GetAddressOf());
         }
+        
 
         // Note this tutorial doesn't handle full-screen swapchains so we block the ALT+ENTER shortcut
         dxgiFactory->MakeWindowAssociation(hWnd, DXGI_MWA_NO_ALT_ENTER);
@@ -162,15 +165,109 @@ namespace library
         m_immediateContext->OMSetRenderTargets(1, m_renderTargetView.GetAddressOf(), nullptr);
 
         // Setup the viewport
-        D3D11_VIEWPORT vp;
-        vp.Width = (FLOAT)width;
-        vp.Height = (FLOAT)height;
-        vp.MinDepth = 0.0f;
-        vp.MaxDepth = 1.0f;
-        vp.TopLeftX = 0;
-        vp.TopLeftY = 0;
+        D3D11_VIEWPORT vp = {
+        .TopLeftX = 0,
+        .TopLeftY = 0,
+        .Width = (FLOAT)width,
+        .Height = (FLOAT)height,
+        .MinDepth = 0.0f,
+        .MaxDepth = 1.0f,
+        };
         m_immediateContext->RSSetViewports(1, &vp);
 
+    // Compile the vertex shader
+    // 
+    //ComPtr<> pVSBlob(nullptr); 로 고쳐야함
+    ComPtr<ID3DBlob> pVSBlob;
+    hr = compileShaderFromFile(L"../Library/Shaders/Lab03.fxh", "VS", "vs_5_0", pVSBlob.GetAddressOf());//..C:\Users\MHC\source\repos\GmG\Library
+    if (FAILED(hr))
+    {
+        MessageBox(nullptr,
+            L"The FX file cannot be compiled.  Please run this executable from the directory that contains the FX file.", L"Error", MB_OK);
+        return hr;
+    }
+
+    // Create the vertex shader
+    hr = m_d3dDevice->CreateVertexShader(pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), nullptr, m_vertexShader.GetAddressOf());
+    if (FAILED(hr))
+    {
+        //pVSBlob->Release();
+        return hr;
+    }
+
+    // Define the input layout
+    D3D11_INPUT_ELEMENT_DESC layout[] =
+    {
+        { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 }
+    };
+    UINT numElements = ARRAYSIZE(layout);// 1
+
+    // Create the input layout
+    hr = m_d3dDevice->CreateInputLayout(layout, numElements, pVSBlob->GetBufferPointer(),
+        pVSBlob->GetBufferSize(), m_vertexLayout.GetAddressOf());
+    //pVSBlob->Release();
+    if (FAILED(hr))
+        return hr;
+
+    // Set the input layout
+    m_immediateContext->IASetInputLayout(m_vertexLayout.Get()); 
+
+    // 여기 컴포인터로 고쳐야함
+    // Compile the pixel shader
+    ComPtr<ID3DBlob> pPSBlob = nullptr;
+    hr = compileShaderFromFile(L"../Library/Shaders/Lab03.fxh", "PS", "ps_5_0", pPSBlob.GetAddressOf()); // compileShaderFromFile(_In_ PCWSTR pszFileName, _In_ PCSTR pszEntryPoint, _In_ PCSTR szShaderModel, _Outptr_ ID3DBlob** ppBlobOut)
+    if (FAILED(hr))
+    {
+        MessageBox(nullptr,
+            L"The FX file cannot be compiled.  Please run this executable from the directory that contains the FX file.", L"Error", MB_OK);
+        return hr;
+    }
+
+    // Create the pixel shader
+    hr = m_d3dDevice->CreatePixelShader(pPSBlob->GetBufferPointer(), pPSBlob->GetBufferSize(), nullptr, m_pixelShader.GetAddressOf());
+    //pPSBlob->Release();
+    if (FAILED(hr))
+        return hr; 
+
+    // Create vertex buffer
+
+    SimpleVertex vertices[] =
+    {
+        XMFLOAT3(0.0f, 0.5f, 0.5f),
+        XMFLOAT3(0.5f, -0.5f, 0.5f),
+        XMFLOAT3(-0.5f, -0.5f, 0.5f),
+    };
+        
+    D3D11_BUFFER_DESC bd = {
+    .ByteWidth = sizeof(SimpleVertex) * 3,
+    .Usage = D3D11_USAGE_DEFAULT,
+    .BindFlags = D3D11_BIND_VERTEX_BUFFER,
+    .CPUAccessFlags = 0,
+    .MiscFlags = 0
+    };
+
+    D3D11_SUBRESOURCE_DATA InitData = {
+    .pSysMem = vertices,
+    .SysMemPitch = 0,
+    .SysMemSlicePitch = 0
+    };
+    hr = m_d3dDevice->CreateBuffer(&bd, &InitData, m_vertexBuffer.GetAddressOf());
+    if (FAILED(hr))
+        return hr;
+
+
+    // Create Index Buffer
+    
+
+
+    // Set vertex buffer
+    UINT stride = sizeof(SimpleVertex);
+    UINT offset = 0;
+    m_immediateContext->IASetVertexBuffers(0, 1, m_vertexBuffer.GetAddressOf(), &stride, &offset);
+
+    // Set primitive topology
+    m_immediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+    
         return S_OK;
     }
 
@@ -182,6 +279,79 @@ namespace library
     void Renderer::Render()
     {
         m_immediateContext->ClearRenderTargetView(m_renderTargetView.Get(), Colors::MidnightBlue);
+        
+        // m_immediateContext->Draw(Numvertices, 0);
+        
+        m_immediateContext->VSSetShader(m_vertexShader.Get(), NULL, 0);
+        m_immediateContext->PSSetShader(m_pixelShader.Get(), NULL, 0);
+        m_immediateContext->Draw(3, 0);
+
         m_swapChain->Present(0, 0);
+        
     }
+    
+    
+    /*M+M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M
+      Method:   Renderer::compileShaderFromFile
+
+      Summary:  Helper for compiling shaders with D3DCompile
+
+      Args:     PCWSTR pszFileName
+                  A pointer to a constant null-terminated string that
+                  contains the name of the file that contains the
+                  shader code
+                PCSTR pszEntryPoint
+                  A pointer to a constant null-terminated string that
+                  contains the name of the shader entry point function
+                  where shader execution begins
+                PCSTR pszShaderModel
+                  A pointer to a constant null-terminated string that
+                  specifies the shader target or set of shader
+                  features to compile against
+                ID3DBlob** ppBlobOut
+                  A pointer to a variable that receives a pointer to
+                  the ID3DBlob interface that you can use to access
+                  the compiled code
+
+      Returns:  HRESULT
+                  Status code
+    M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M-M*/
+    HRESULT Renderer::compileShaderFromFile(PCWSTR pszFileName, PCSTR pszEntryPoint, PCSTR szShaderModel, ID3DBlob** ppBlobOut)
+    {
+        HRESULT hr = S_OK;
+
+        DWORD dwShaderFlags = D3DCOMPILE_ENABLE_STRICTNESS;
+#ifdef _DEBUG
+        // Set the D3DCOMPILE_DEBUG flag to embed debug information in the shaders.
+        // Setting this flag improves the shader debugging experience, but still allows 
+        // the shaders to be optimized and to run exactly the way they will run in 
+        // the release configuration of this program.
+        dwShaderFlags |= D3DCOMPILE_DEBUG;
+
+        // Disable optimizations to further improve shader debugging
+        dwShaderFlags |= D3DCOMPILE_SKIP_OPTIMIZATION;
+#endif
+
+        //comptr 로 고치기
+        //ID3DBlob* pErrorBlob = nullptr;
+        ComPtr<ID3DBlob> pErrorBlob(nullptr);
+        hr = D3DCompileFromFile(pszFileName, nullptr, nullptr, pszEntryPoint, szShaderModel, //d3dx?
+            dwShaderFlags, 0, ppBlobOut, pErrorBlob.GetAddressOf());
+        if (FAILED(hr))
+        {
+            if (pErrorBlob)
+            {
+                OutputDebugStringA((char*)pErrorBlob->GetBufferPointer());
+                //pErrorBlob->Release();
+            }
+            return hr;
+        }
+       // if (pErrorBlob) pErrorBlob->Release();
+
+        return S_OK;
+    }
+        
+
+
 }
+

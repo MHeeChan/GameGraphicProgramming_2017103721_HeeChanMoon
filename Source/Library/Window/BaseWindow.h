@@ -135,13 +135,8 @@ namespace library
       TODO: BaseWindow<DerivedType>::BaseWindow definition (remove the comment)
     --------------------------------------------------------------------*/
     template <class DerivedType>
-    BaseWindow<DerivedType>::BaseWindow()
-    {
-        m_hInstance = nullptr;
-        m_hWnd = nullptr;
-        m_pszWindowName = (L"WindowName");
-
-    }
+    BaseWindow<DerivedType>::BaseWindow():m_hInstance(nullptr), m_hWnd(nullptr), m_pszWindowName(nullptr) {}
+   
 
     /*M+M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M
         Method:   BaseWindow<DerivedType>::GetWindow()
@@ -253,16 +248,6 @@ namespace library
             }
             return E_FAIL;
         }
-        
-
-
-      
-        assert(m_hWnd);
-        if (!m_hWnd)
-        {// 오류 검사
-            return E_FAIL;
-        }
-
 
         ShowWindow(m_hWnd, nCmdShow);//창띄우기
 
