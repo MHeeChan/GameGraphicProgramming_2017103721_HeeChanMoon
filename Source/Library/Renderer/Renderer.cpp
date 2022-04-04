@@ -214,7 +214,7 @@ namespace library
 
     // 여기 컴포인터로 고쳐야함
     // Compile the pixel shader
-    ComPtr<ID3DBlob> pPSBlob = nullptr;
+    ComPtr<ID3DBlob> pPSBlob(nullptr);
     hr = compileShaderFromFile(L"../Library/Shaders/Lab03.fxh", "PS", "ps_5_0", pPSBlob.GetAddressOf()); // compileShaderFromFile(_In_ PCWSTR pszFileName, _In_ PCSTR pszEntryPoint, _In_ PCSTR szShaderModel, _Outptr_ ID3DBlob** ppBlobOut)
     if (FAILED(hr))
     {

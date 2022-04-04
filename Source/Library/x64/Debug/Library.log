@@ -625,9 +625,6 @@ C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt\wrl\event.h(44
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt\wrl\implements.h(1619,1): warning C4365: 'return': conversion from 'LONG' to 'unsigned long', signed/unsigned mismatch
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt\wrl\implements.h(1615): message : while compiling class template member function 'unsigned long Microsoft::WRL::Details::RuntimeClassImpl<Microsoft::WRL::RuntimeClassFlags<2>,true,false,true,IUnknown>::InternalAddRef(void) noexcept'
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt\wrl\implements.h(1580): message : see reference to function template instantiation 'unsigned long Microsoft::WRL::Details::RuntimeClassImpl<Microsoft::WRL::RuntimeClassFlags<2>,true,false,true,IUnknown>::InternalAddRef(void) noexcept' being compiled
-C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(347): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
-C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(340): message : index 'hr' range checked by comparison on this line
-C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(347): message : feeds call on this line
 C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(256): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(255): message : index 'hr' range checked by comparison on this line
 C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(256): message : feeds call on this line
@@ -673,6 +670,9 @@ C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(68): message 
 C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(62): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(59): message : index 'driverTypeIndex' range checked by comparison on this line
 C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(62): message : feeds call on this line
+C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(347): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(340): message : index 'hr' range checked by comparison on this line
+C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(347): message : feeds call on this line
   Library.vcxproj -> C:\Users\MHC\source\repos\GmG\Build\x64\Debug\Libraryd.lib
   하위 디렉터리 또는 파일 C:\Users\MHC\source\repos\GmG\Build\..\Library\x64\Debug이(가) 이미 있습니다.
   C:\Users\MHC\source\repos\GmG\Build\x64\Debug\Game.exe
