@@ -11,7 +11,20 @@ namespace library
                   m_immediateContext, m_immediateContext1, m_swapChain, 
                   m_swapChain1, m_renderTargetView].
     M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M-M*/
-    Renderer::Renderer(){}
+    Renderer::Renderer()
+        :m_driverType(D3D_DRIVER_TYPE_NULL)
+        , m_featureLevel(D3D_FEATURE_LEVEL_11_0)
+        , m_d3dDevice(nullptr)
+        , m_d3dDevice1(nullptr)
+        , m_immediateContext(nullptr)
+        , m_immediateContext1(nullptr)
+        , m_swapChain(nullptr)
+        , m_swapChain1(nullptr)
+        , m_renderTargetView(nullptr)
+
+        , m_renderables()
+        , m_vertexShaders()
+        , m_pixelShaders() {};
 
     /*M+M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M
       Method:   Renderer::Initialize
@@ -142,8 +155,6 @@ namespace library
         
             hr = dxgiFactory->CreateSwapChain(m_d3dDevice.Get(), &sd, m_swapChain.GetAddressOf());
         }
-        
-
         // Note this tutorial doesn't handle full-screen swapchains so we block the ALT+ENTER shortcut
         dxgiFactory->MakeWindowAssociation(hWnd, DXGI_MWA_NO_ALT_ENTER);
 
@@ -161,9 +172,35 @@ namespace library
         hr = m_d3dDevice->CreateRenderTargetView(pBackBuffer.Get(), nullptr, m_renderTargetView.GetAddressOf());
         if (FAILED(hr))
             return hr;
+        
+        ////////////
+        D3D11_TEXTURE2D_DESC descDepth = {};
+        descDepth.Width = width;
+        descDepth.Height = height;
+        descDepth.MipLevels = 1;
+        descDepth.ArraySize = 1;
+        descDepth.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+        descDepth.SampleDesc.Count = 1;
+        descDepth.SampleDesc.Quality = 0;
+        descDepth.Usage = D3D11_USAGE_DEFAULT;
+        descDepth.BindFlags = D3D11_BIND_DEPTH_STENCIL;
+        descDepth.CPUAccessFlags = 0;
+        descDepth.MiscFlags = 0;
+        hr = m_d3dDevice->CreateTexture2D(&descDepth, nullptr, m_depthStencil.GetAddressOf());
+        if (FAILED(hr))
+            return hr;
 
-        m_immediateContext->OMSetRenderTargets(1, m_renderTargetView.GetAddressOf(), nullptr);
+        // Create the depth stencil view
+        D3D11_DEPTH_STENCIL_VIEW_DESC descDSV = {};
+        descDSV.Format = descDepth.Format;
+        descDSV.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
+        descDSV.Texture2D.MipSlice = 0;
+        hr = m_d3dDevice->CreateDepthStencilView(m_depthStencil.Get(), &descDSV, m_depthStencilView.GetAddressOf());
+        if (FAILED(hr))
+            return hr;   
 
+        m_immediateContext->OMSetRenderTargets(1, m_renderTargetView.GetAddressOf(), m_depthStencilView.Get());
+        
         // Setup the viewport
         D3D11_VIEWPORT vp = {
         .TopLeftX = 0,
@@ -173,102 +210,143 @@ namespace library
         .MinDepth = 0.0f,
         .MaxDepth = 1.0f,
         };
+
         m_immediateContext->RSSetViewports(1, &vp);
 
-    // Compile the vertex shader
-    // 
-    //ComPtr<> pVSBlob(nullptr); 로 고쳐야함
-    ComPtr<ID3DBlob> pVSBlob;
-    hr = compileShaderFromFile(L"../Library/Shaders/Lab03.fxh", "VS", "vs_5_0", pVSBlob.GetAddressOf());//..C:\Users\MHC\source\repos\GmG\Library
-    if (FAILED(hr))
+        m_immediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+    // Initialize the world matrix
+
+    // Initialize the view matrix
+    XMVECTOR Eye = XMVectorSet(0.0f, 1.0f, -5.0f, 0.0f);
+    XMVECTOR At = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
+    XMVECTOR Up = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
+    m_view = XMMatrixLookAtLH(Eye, At, Up);
+
+    // Initialize the projection matrix
+    m_projection = XMMatrixPerspectiveFovLH(XM_PIDIV2, width / (FLOAT)height, 0.01f, 100.0f);
+
+    for (auto i : m_vertexShaders)
     {
-        MessageBox(nullptr,
-            L"The FX file cannot be compiled.  Please run this executable from the directory that contains the FX file.", L"Error", MB_OK);
-        return hr;
+        i.second->Initialize(m_d3dDevice.Get());
     }
 
-    // Create the vertex shader
-    hr = m_d3dDevice->CreateVertexShader(pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), nullptr, m_vertexShader.GetAddressOf());
-    if (FAILED(hr))
+    for (auto i : m_pixelShaders)
     {
-        //pVSBlob->Release();
-        return hr;
+        i.second->Initialize(m_d3dDevice.Get());
     }
 
-    // Define the input layout
-    D3D11_INPUT_ELEMENT_DESC layout[] =
+    for (auto i : m_renderables)
     {
-        { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 }
-    };
-    UINT numElements = ARRAYSIZE(layout);// 1
-
-    // Create the input layout
-    hr = m_d3dDevice->CreateInputLayout(layout, numElements, pVSBlob->GetBufferPointer(),
-        pVSBlob->GetBufferSize(), m_vertexLayout.GetAddressOf());
-    //pVSBlob->Release();
-    if (FAILED(hr))
-        return hr;
-
-    // Set the input layout
-    m_immediateContext->IASetInputLayout(m_vertexLayout.Get()); 
-
-    // 여기 컴포인터로 고쳐야함
-    // Compile the pixel shader
-    ComPtr<ID3DBlob> pPSBlob(nullptr);
-    hr = compileShaderFromFile(L"../Library/Shaders/Lab03.fxh", "PS", "ps_5_0", pPSBlob.GetAddressOf()); // compileShaderFromFile(_In_ PCWSTR pszFileName, _In_ PCSTR pszEntryPoint, _In_ PCSTR szShaderModel, _Outptr_ ID3DBlob** ppBlobOut)
-    if (FAILED(hr))
-    {
-        MessageBox(nullptr,
-            L"The FX file cannot be compiled.  Please run this executable from the directory that contains the FX file.", L"Error", MB_OK);
-        return hr;
+        i.second->Initialize(m_d3dDevice.Get(), m_immediateContext.Get());
     }
 
-    // Create the pixel shader
-    hr = m_d3dDevice->CreatePixelShader(pPSBlob->GetBufferPointer(), pPSBlob->GetBufferSize(), nullptr, m_pixelShader.GetAddressOf());
-    //pPSBlob->Release();
-    if (FAILED(hr))
-        return hr; 
-
-    // Create vertex buffer
-
-    SimpleVertex vertices[] =
-    {
-        XMFLOAT3(0.0f, 0.5f, 0.5f),
-        XMFLOAT3(0.5f, -0.5f, 0.5f),
-        XMFLOAT3(-0.5f, -0.5f, 0.5f),
-    };
-        
-    D3D11_BUFFER_DESC bd = {
-    .ByteWidth = sizeof(SimpleVertex) * 3,
-    .Usage = D3D11_USAGE_DEFAULT,
-    .BindFlags = D3D11_BIND_VERTEX_BUFFER,
-    .CPUAccessFlags = 0,
-    .MiscFlags = 0
-    };
-
-    D3D11_SUBRESOURCE_DATA InitData = {
-    .pSysMem = vertices,
-    .SysMemPitch = 0,
-    .SysMemSlicePitch = 0
-    };
-    hr = m_d3dDevice->CreateBuffer(&bd, &InitData, m_vertexBuffer.GetAddressOf());
-    if (FAILED(hr))
-        return hr;
-
-
-    // Create Index Buffer
-    
-
-
-    // Set vertex buffer
-    UINT stride = sizeof(SimpleVertex);
-    UINT offset = 0;
-    m_immediateContext->IASetVertexBuffers(0, 1, m_vertexBuffer.GetAddressOf(), &stride, &offset);
-
-    // Set primitive topology
-    m_immediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-    
         return S_OK;
+    }
+
+    /*M+M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M
+      Method:   Renderer::AddRenderable
+
+      Summary:  Add a renderable object and initialize the object
+
+      Args:     PCWSTR pszRenderableName
+                  Key of the renderable object
+                const std::shared_ptr<Renderable>& renderable
+                  Unique pointer to the renderable object
+
+      Modifies: [m_renderables].
+
+      Returns:  HRESULT
+                  Status code.
+    M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M-M*/
+    /*--------------------------------------------------------------------
+      TODO: Renderer::AddRenderable definition (remove the comment)
+    --------------------------------------------------------------------*/
+    HRESULT Renderer::AddRenderable(_In_ PCWSTR pszRenderableName, _In_ const std::shared_ptr<Renderable>& renderable)
+    {
+        if (m_renderables.contains(pszRenderableName))
+        {
+            return E_FAIL;
+        }
+        else
+            m_renderables[pszRenderableName] = renderable;
+        return S_OK;
+    }
+
+    /*M+M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M
+      Method:   Renderer::AddVertexShader
+
+      Summary:  Add the vertex shader into the renderer and initialize it
+
+      Args:     PCWSTR pszVertexShaderName
+                  Key of the vertex shader
+                const std::shared_ptr<VertexShader>&
+                  Vertex shader to add
+
+      Modifies: [m_vertexShaders].
+
+      Returns:  HRESULT
+                  Status code
+    M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M-M*/
+    /*--------------------------------------------------------------------
+      TODO: Renderer::AddVertexShader definition (remove the comment)
+    --------------------------------------------------------------------*/
+    HRESULT Renderer::AddVertexShader(_In_ PCWSTR pszVertexShaderName, _In_ const std::shared_ptr<VertexShader>& vertexShader)
+    {
+        if (m_vertexShaders.contains(pszVertexShaderName))
+        {
+            return E_FAIL;
+        }
+        else
+            m_vertexShaders[pszVertexShaderName] =  vertexShader;
+        return S_OK;
+    }
+
+    /*M+M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M
+      Method:   Renderer::AddPixelShader
+
+      Summary:  Add the pixel shader into the renderer and initialize it
+
+      Args:     PCWSTR pszPixelShaderName
+                  Key of the pixel shader
+                const std::shared_ptr<PixelShader>&
+                  Pixel shader to add
+
+      Modifies: [m_pixelShaders].
+
+      Returns:  HRESULT
+                  Status code
+    M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M-M*/
+    /*--------------------------------------------------------------------
+      TODO: Renderer::AddPixelShader definition (remove the comment)
+    --------------------------------------------------------------------*/
+    HRESULT Renderer::AddPixelShader(_In_ PCWSTR pszPixelShaderName, _In_ const std::shared_ptr<PixelShader>& pixelShader)
+    {
+        if (m_pixelShaders.contains(pszPixelShaderName))
+        {
+            return E_FAIL;
+        }
+        else
+            m_pixelShaders[pszPixelShaderName] = pixelShader;
+        return S_OK;
+    }
+
+    /*M+M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M
+      Method:   Renderer::Update
+
+      Summary:  Update the renderables each frame
+
+      Args:     FLOAT deltaTime
+                  Time difference of a frame
+    M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M-M*/
+    /*--------------------------------------------------------------------
+      TODO: Renderer::Update definition (remove the comment)
+    --------------------------------------------------------------------*/
+    void Renderer::Update(_In_ FLOAT deltaTime)
+    {
+        for (auto i : m_renderables)
+        {
+            i.second->Update(deltaTime);
+        }
     }
 
     /*M+M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M
@@ -278,80 +356,109 @@ namespace library
     M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M-M*/
     void Renderer::Render()
     {
-        m_immediateContext->ClearRenderTargetView(m_renderTargetView.Get(), Colors::MidnightBlue);
+        float ClearColor[4] = { 0.0f,0.125f,0.6f,1.0f };
+
+        UINT stride = sizeof(SimpleVertex);
+        UINT offset = 0;
+        m_immediateContext->ClearRenderTargetView(m_renderTargetView.Get(), ClearColor);
+        m_immediateContext->ClearDepthStencilView(m_depthStencilView.Get(), D3D11_CLEAR_DEPTH, 1.0f, 0);
         
-        // m_immediateContext->Draw(Numvertices, 0);
-        
-        m_immediateContext->VSSetShader(m_vertexShader.Get(), NULL, 0);
-        m_immediateContext->PSSetShader(m_pixelShader.Get(), NULL, 0);
-        m_immediateContext->Draw(3, 0);
+        for (auto i : m_renderables)
+        {
+            m_immediateContext->IASetVertexBuffers(0, 1, i.second->GetVertexBuffer().GetAddressOf(), &stride, &offset);
+            m_immediateContext->IASetIndexBuffer(i.second->GetIndexBuffer().Get(), DXGI_FORMAT_R16_UINT, 0);
+            m_immediateContext->IASetInputLayout(i.second->GetVertexLayout().Get()); ////////
+            ConstantBuffer cb;
+            cb.World = XMMatrixTranspose(i.second->GetWorldMatrix());
+            cb.View = XMMatrixTranspose(m_view);
+            cb.Projection = XMMatrixTranspose(m_projection);
+            m_immediateContext->UpdateSubresource(i.second->GetConstantBuffer().Get(), 0, nullptr, &cb, 0, 0);
+            m_immediateContext->VSSetShader(i.second->GetVertexShader().Get(), nullptr, 0);///////////
+            m_immediateContext->VSSetConstantBuffers(0, 1, i.second->GetConstantBuffer().GetAddressOf());
+            m_immediateContext->PSSetShader(i.second->GetPixelShader().Get(), nullptr, 0);//////////
+            m_immediateContext->DrawIndexed(i.second->GetNumIndices(), 0, 0);
+        }
 
         m_swapChain->Present(0, 0);
-        
     }
-    
-    
+
     /*M+M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M
-      Method:   Renderer::compileShaderFromFile
+      Method:   Renderer::SetVertexShaderOfRenderable
 
-      Summary:  Helper for compiling shaders with D3DCompile
+      Summary:  Sets the vertex shader for a renderable
 
-      Args:     PCWSTR pszFileName
-                  A pointer to a constant null-terminated string that
-                  contains the name of the file that contains the
-                  shader code
-                PCSTR pszEntryPoint
-                  A pointer to a constant null-terminated string that
-                  contains the name of the shader entry point function
-                  where shader execution begins
-                PCSTR pszShaderModel
-                  A pointer to a constant null-terminated string that
-                  specifies the shader target or set of shader
-                  features to compile against
-                ID3DBlob** ppBlobOut
-                  A pointer to a variable that receives a pointer to
-                  the ID3DBlob interface that you can use to access
-                  the compiled code
+      Args:     PCWSTR pszRenderableName
+                  Key of the renderable
+                PCWSTR pszVertexShaderName
+                  Key of the vertex shader
+
+      Modifies: [m_renderables].
 
       Returns:  HRESULT
                   Status code
     M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M-M*/
-    HRESULT Renderer::compileShaderFromFile(PCWSTR pszFileName, PCSTR pszEntryPoint, PCSTR szShaderModel, ID3DBlob** ppBlobOut)
+    /*--------------------------------------------------------------------
+      TODO: Renderer::SetVertexShaderOfRenderable definition (remove the comment)
+    --------------------------------------------------------------------*/
+    HRESULT Renderer::SetVertexShaderOfRenderable(_In_ PCWSTR pszRenderableName, _In_ PCWSTR pszVertexShaderName)
     {
         HRESULT hr = S_OK;
-
-        DWORD dwShaderFlags = D3DCOMPILE_ENABLE_STRICTNESS;
-#ifdef _DEBUG
-        // Set the D3DCOMPILE_DEBUG flag to embed debug information in the shaders.
-        // Setting this flag improves the shader debugging experience, but still allows 
-        // the shaders to be optimized and to run exactly the way they will run in 
-        // the release configuration of this program.
-        dwShaderFlags |= D3DCOMPILE_DEBUG;
-
-        // Disable optimizations to further improve shader debugging
-        dwShaderFlags |= D3DCOMPILE_SKIP_OPTIMIZATION;
-#endif
-
-        //comptr 로 고치기
-        //ID3DBlob* pErrorBlob = nullptr;
-        ComPtr<ID3DBlob> pErrorBlob(nullptr);
-        hr = D3DCompileFromFile(pszFileName, nullptr, nullptr, pszEntryPoint, szShaderModel, //d3dx?
-            dwShaderFlags, 0, ppBlobOut, pErrorBlob.GetAddressOf());
-        if (FAILED(hr))
+        if (!m_renderables.contains(pszRenderableName) || !m_vertexShaders.contains(pszVertexShaderName))
         {
-            if (pErrorBlob)
-            {
-                OutputDebugStringA((char*)pErrorBlob->GetBufferPointer());
-                //pErrorBlob->Release();
-            }
+            hr == E_FAIL;
             return hr;
         }
-       // if (pErrorBlob) pErrorBlob->Release();
+        else
+            m_renderables[pszRenderableName]->SetVertexShader(m_vertexShaders[pszVertexShaderName]);
 
-        return S_OK;
+        return hr;
     }
-        
 
+    /*M+M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M
+      Method:   Renderer::SetPixelShaderOfRenderable
+
+      Summary:  Sets the pixel shader for a renderable
+
+      Args:     PCWSTR pszRenderableName
+                  Key of the renderable
+                PCWSTR pszPixelShaderName
+                  Key of the pixel shader
+
+      Modifies: [m_renderables].
+
+      Returns:  HRESULT
+                  Status code
+    M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M-M*/
+  
+    HRESULT Renderer::SetPixelShaderOfRenderable(_In_ PCWSTR pszRenderableName, _In_ PCWSTR pszPixelShaderName)
+    {
+        HRESULT hr = S_OK;
+        if (!m_renderables.contains(pszRenderableName) || !m_pixelShaders.contains(pszPixelShaderName))
+        {
+            hr == E_FAIL;
+            return hr;
+        }
+        else
+            m_renderables[pszRenderableName]->SetPixelShader(m_pixelShaders[pszPixelShaderName]);
+        
+        return hr;
+    }
+
+    /*M+M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M
+      Method:   Renderer::GetDriverType
+
+      Summary:  Returns the Direct3D driver type
+
+      Returns:  D3D_DRIVER_TYPE
+                  The Direct3D driver type used
+    M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M-M*/
+    /*--------------------------------------------------------------------
+      TODO: Renderer::GetDriverType definition (remove the comment)
+    --------------------------------------------------------------------*/
+    D3D_DRIVER_TYPE Renderer::GetDriverType() const
+    {
+        return m_driverType;
+    }
 
 }
 

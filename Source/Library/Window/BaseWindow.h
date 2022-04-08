@@ -1,4 +1,3 @@
-
 /*+===================================================================
   File:      BASEWINDOW.H
 
@@ -12,7 +11,6 @@
 #pragma once
 
 #include "Common.h"
-#include <cassert>
 
 namespace library
 {
@@ -57,7 +55,6 @@ namespace library
 
         HWND GetWindow() const;
 
-
     protected:
         HRESULT initialize(
             _In_ HINSTANCE hInstance,
@@ -100,15 +97,17 @@ namespace library
     /*--------------------------------------------------------------------
       TODO: BaseWindow<DerivedType>::WindowProc definition (remove the comment)
     --------------------------------------------------------------------*/
-    template <class DerivedType>
+
+    template<class DerivedType>
+
     LRESULT BaseWindow<DerivedType>::WindowProc(_In_ HWND hWnd, _In_ UINT uMsg, _In_ WPARAM wParam, _In_ LPARAM lParam)
     {
         DerivedType* pThis = nullptr;
 
         if (uMsg == WM_NCCREATE)
         {
-            CREATESTRUCT* pCreate = reinterpret_cast<CREATESTRUCT*>(lParam);
-            pThis = reinterpret_cast<DerivedType*>(pCreate->lpCreateParams);
+            CREATESTRUCT* pCreate = reinterpret_cast<CREATESTRUCT*> (lParam);
+            pThis = reinterpret_cast<DerivedType*> (pCreate->lpCreateParams);
             SetWindowLongPtr(hWnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(pThis));
             pThis->m_hWnd = hWnd;
         }
@@ -121,7 +120,10 @@ namespace library
         {
             return pThis->HandleMessage(uMsg, wParam, lParam);
         }
-        return DefWindowProc(hWnd, uMsg, wParam, lParam);
+        else
+        {
+            return DefWindowProc(hWnd, uMsg, wParam, lParam);
+        }
     }
 
     /*M+M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M
@@ -134,9 +136,13 @@ namespace library
     /*--------------------------------------------------------------------
       TODO: BaseWindow<DerivedType>::BaseWindow definition (remove the comment)
     --------------------------------------------------------------------*/
+
     template <class DerivedType>
-    BaseWindow<DerivedType>::BaseWindow():m_hInstance(nullptr), m_hWnd(nullptr), m_pszWindowName(nullptr) {}
-   
+    BaseWindow<DerivedType>::BaseWindow()
+        : m_hInstance(nullptr)
+        , m_hWnd(nullptr)
+        , m_pszWindowName(L"Default")
+    { }
 
     /*M+M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M
         Method:   BaseWindow<DerivedType>::GetWindow()
@@ -149,14 +155,12 @@ namespace library
     /*--------------------------------------------------------------------
       TODO: BaseWindow<DerivedType>::GetWindow definition (remove the comment)
     --------------------------------------------------------------------*/
+
     template <class DerivedType>
     HWND BaseWindow<DerivedType>::GetWindow() const
     {
         return m_hWnd;
     }
-
-
-
 
     /*M+M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M
       Method:   BaseWindow<DerivedType>::initialize
@@ -196,7 +200,7 @@ namespace library
       TODO: BaseWindow<DerivedType>::initialize definition (remove the comment)
     --------------------------------------------------------------------*/
     template <class DerivedType>
-    HRESULT BaseWindow<DerivedType>::initialize(_In_ HINSTANCE hInstance, // register class
+    HRESULT BaseWindow<DerivedType>::initialize(_In_ HINSTANCE hInstance,
         _In_ INT nCmdShow,
         _In_ PCWSTR pszWindowName,
         _In_ DWORD dwStyle,
@@ -207,49 +211,28 @@ namespace library
         _In_opt_ HWND hWndParent,
         _In_opt_ HMENU hMenu)
     {
-        m_pszWindowName = pszWindowName;
-        WNDCLASSEX wcex; // 윈도우 클래스 선언
+        WNDCLASSEX wcex;
         wcex.cbSize = sizeof(WNDCLASSEX);
         wcex.style = CS_HREDRAW | CS_VREDRAW;
-        wcex.lpfnWndProc = WindowProc; // 함수 포인터. OS에서 발생하는 이벤트(키보드, 마우스 등)들이 발생할 때 알려달라는 것
+        wcex.lpfnWndProc = DerivedType::WindowProc;
         wcex.cbClsExtra = 0;
         wcex.cbWndExtra = 0;
         wcex.hInstance = hInstance;
-        wcex.hIcon = LoadIcon(hInstance, (LPCTSTR)IDI_TUTORIAL); // 
-        wcex.hCursor = LoadCursor(nullptr, IDC_ARROW); // null 넣으면 알아서 찾음
+        wcex.hIcon = LoadIcon(hInstance, (LPCTSTR)IDI_TUTORIAL);
+        wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
         wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
         wcex.lpszMenuName = nullptr;
         wcex.lpszClassName = GetWindowClassName();
         wcex.hIconSm = LoadIcon(wcex.hInstance, (LPCTSTR)IDI_TUTORIAL);
- 
-        if (!RegisterClassEx(&wcex)) // 윈도우 클래스 등록 , 오류시 탈출
+        if (!RegisterClassEx(&wcex))
             return E_FAIL;
-            
+
         m_hInstance = hInstance;
-        RECT rc = { 0, 0, 800, 600 };
-        AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE); // 작업영역, 윈도우 스타일, 메뉴여부
-        m_hWnd = CreateWindow(GetWindowClassName(), pszWindowName, /// wide character 이기 때문에 L을 붙임
-            WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX,
-            CW_USEDEFAULT, CW_USEDEFAULT, rc.right - rc.left, rc.bottom - rc.top, nullptr, nullptr, hInstance, this);
-
-
-        if(m_hWnd==NULL)
-        {
-            DWORD dwError = GetLastError();
-            MessageBox(
-                nullptr,
-                L"Call to RegisterClassEx failed!",
-                L"Game Graphics Programming",
-                NULL
-            );
-            if (dwError != ERROR_CLASS_ALREADY_EXISTS)
-            {
-                return HRESULT_FROM_WIN32(dwError);
-            }
+        m_hWnd = CreateWindow(GetWindowClassName(), pszWindowName, dwStyle, x, y, 800, 600, hWndParent, hMenu, hInstance, this);
+        if (!m_hWnd)
             return E_FAIL;
-        }
 
-        ShowWindow(m_hWnd, nCmdShow);//창띄우기
+        ShowWindow(m_hWnd, nCmdShow);
 
         return S_OK;
     }

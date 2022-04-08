@@ -13,9 +13,6 @@ namespace library
 
 	  Modifies: [m_pszGameName, m_mainWindow, m_renderer].
 	M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M-M*/
-	/*--------------------------------------------------------------------
-	  TODO: Game::Game definition (remove the comment)
-	--------------------------------------------------------------------*/
 	Game::Game(_In_ PCWSTR pszGameName)
 	{
 		m_mainWindow = std::make_unique<MainWindow>();
@@ -62,6 +59,13 @@ namespace library
 	INT Game::Run()
 	{
 		MSG msg = {0};
+		LARGE_INTEGER StartingTime, EndingTime;
+		FLOAT ElapsedSeconds;
+		LARGE_INTEGER Frequency;
+
+		QueryPerformanceFrequency(&Frequency);
+		QueryPerformanceCounter(&StartingTime);
+
 		// msg.hwnd -> 메시지가 발생한 윈도우
 		while (WM_QUIT != msg.message)
 		{
@@ -72,7 +76,12 @@ namespace library
 			}
 			else
 			{
+				QueryPerformanceCounter(&EndingTime);
+				ElapsedSeconds = (FLOAT)(EndingTime.QuadPart - StartingTime.QuadPart) / (FLOAT)Frequency.QuadPart;
+				QueryPerformanceCounter(&StartingTime);
+				m_renderer->Update(ElapsedSeconds);
 				m_renderer -> Render();
+				
 			}
 		}
 		return 0;
@@ -89,5 +98,36 @@ namespace library
 	PCWSTR Game::GetGameName() const
 	{
 		return m_pszGameName;
+	}
+	/*M+M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M
+	  Method:   Game::GetWindow
+
+	  Summary:  Returns the main window
+
+	  Returns:  std::unique_ptr<MainWindow>&
+				  The main window
+	M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M-M*/
+	/*--------------------------------------------------------------------
+	  TODO: Game::GetWindow definition (remove the comment)
+	--------------------------------------------------------------------*/
+	std::unique_ptr<MainWindow>& Game::GetWindow()
+	{
+		return m_mainWindow;
+	}
+
+	/*M+M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M
+	  Method:   Game::GetRenderer
+
+	  Summary:  Returns the renderer
+
+	  Returns:  std::unique_ptr<Renderer>&
+				  The renderer
+	M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M-M*/
+	/*--------------------------------------------------------------------
+	  TODO: Game::GetRenderer definition (remove the comment)
+	--------------------------------------------------------------------*/
+	std::unique_ptr<Renderer>& Game::GetRenderer()
+	{
+		return m_renderer;
 	}
 }
