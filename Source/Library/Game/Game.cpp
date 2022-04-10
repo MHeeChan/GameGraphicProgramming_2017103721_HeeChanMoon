@@ -76,10 +76,17 @@ namespace library
 			}
 			else
 			{
+				// m_renderer->HandleInput(m_mainWindow->GetDirections(),m_mainWindow->GetMouseRelativeMovement(),deltaTime);
+				// m_mainWindow->ResetMouseMovement();
+
 				QueryPerformanceCounter(&EndingTime);
 				ElapsedSeconds = (FLOAT)(EndingTime.QuadPart - StartingTime.QuadPart) / (FLOAT)Frequency.QuadPart;
-				QueryPerformanceCounter(&StartingTime);
+				
+
+				m_renderer->HandleInput(m_mainWindow->GetDirections(),m_mainWindow->GetMouseRelativeMovement(),ElapsedSeconds);
+				m_mainWindow->ResetMouseMovement();
 				m_renderer->Update(ElapsedSeconds);
+				QueryPerformanceCounter(&StartingTime);
 				m_renderer -> Render();
 				
 			}

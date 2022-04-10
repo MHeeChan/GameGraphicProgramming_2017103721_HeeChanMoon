@@ -19,6 +19,9 @@
     <Filter Include="소스 파일\Shaders">
       <UniqueIdentifier>{95331ab7-83b5-4be3-9b10-afb662447054}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Cube\헤더 파일">
+      <UniqueIdentifier>{ab5bbb72-3b7e-4f93-a511-e4760d7a3d05}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -27,28 +30,28 @@
     <ClCompile Include="Cube\BaseCube.cpp">
       <Filter>소스 파일\Cube</Filter>
     </ClCompile>
-    <ClCompile Include="Cube\MyCube.cpp">
+    <ClCompile Include="CubeAct.cpp">
       <Filter>소스 파일\Cube</Filter>
     </ClCompile>
-    <ClCompile Include="Cube\CubeAct.cpp">
-      <Filter>소스 파일</Filter>
+    <ClCompile Include="Cube\MyCube.cpp">
+      <Filter>소스 파일\Cube</Filter>
     </ClCompile>
     <ClCompile Include="Cube\UserCube.cpp">
       <Filter>소스 파일\Cube</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Cube\BaseCube.h">
-      <Filter>소스 파일\Cube</Filter>
-    </ClInclude>
-    <ClInclude Include="MyCube.h">
-      <Filter>소스 파일\Cube</Filter>
-    </ClInclude>
     <ClInclude Include="Cube\CubeAct.h">
-      <Filter>소스 파일\Cube</Filter>
+      <Filter>소스 파일\Cube\헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube\BaseCube.h">
+      <Filter>소스 파일\Cube\헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube\MyCube.h">
+      <Filter>소스 파일\Cube\헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Cube\UserCube.h">
-      <Filter>소스 파일\Cube</Filter>
+      <Filter>소스 파일\Cube\헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

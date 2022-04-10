@@ -7,10 +7,12 @@ namespace library
 
       Summary:  Constructor
 
-      Modifies: [m_driverType, m_featureLevel, m_d3dDevice, m_d3dDevice1, 
-                  m_immediateContext, m_immediateContext1, m_swapChain, 
-                  m_swapChain1, m_renderTargetView].
+      Modifies: [m_driverType, m_featureLevel, m_d3dDevice, m_d3dDevice1,
+                 m_immediateContext, m_immediateContext1, m_swapChain,
+                 m_swapChain1, m_renderTargetView, m_vertexShader,
+                 m_pixelShader, m_vertexLayout, m_vertexBuffer].
     M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M-M*/
+    /////////// m_vertexBuffer
     Renderer::Renderer()
         :m_driverType(D3D_DRIVER_TYPE_NULL)
         , m_featureLevel(D3D_FEATURE_LEVEL_11_0)
@@ -21,10 +23,12 @@ namespace library
         , m_swapChain(nullptr)
         , m_swapChain1(nullptr)
         , m_renderTargetView(nullptr)
-
         , m_renderables()
         , m_vertexShaders()
-        , m_pixelShaders() {};
+        , m_pixelShaders()
+        , m_camera(XMVectorSet(0.0f, 1.0f, -5.0f, 0.0f))
+        , m_projection()
+    {}
 
     /*M+M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M
       Method:   Renderer::Initialize
@@ -34,13 +38,15 @@ namespace library
       Args:     HWND hWnd
                   Handle to the window
 
-      Modifies: [m_d3dDevice, m_featureLevel, m_immediateContext, 
-                  m_d3dDevice1, m_immediateContext1, m_swapChain1, 
-                  m_swapChain, m_renderTargetView].
+      Modifies: [m_d3dDevice, m_featureLevel, m_immediateContext,
+                 m_d3dDevice1, m_immediateContext1, m_swapChain1,
+                 m_swapChain, m_renderTargetView, m_vertexShader,
+                 m_vertexLayout, m_pixelShader, m_vertexBuffer].
 
       Returns:  HRESULT
                   Status code
     M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M-M*/
+    ////////////////  m_vertexBuffer
     HRESULT Renderer::Initialize(_In_ HWND hWnd)
     {
         HRESULT hr = S_OK;
@@ -217,10 +223,10 @@ namespace library
     // Initialize the world matrix
 
     // Initialize the view matrix
-    XMVECTOR Eye = XMVectorSet(0.0f, 1.0f, -5.0f, 0.0f);
+    /*XMVECTOR Eye = XMVectorSet(0.0f, 1.0f, -5.0f, 0.0f);
     XMVECTOR At = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
     XMVECTOR Up = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
-    m_view = XMMatrixLookAtLH(Eye, At, Up);
+    m_view = XMMatrixLookAtLH(Eye, At, Up);*/
 
     // Initialize the projection matrix
     m_projection = XMMatrixPerspectiveFovLH(XM_PIDIV2, width / (FLOAT)height, 0.01f, 100.0f);
@@ -273,23 +279,20 @@ namespace library
     }
 
     /*M+M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M
-      Method:   Renderer::AddVertexShader
+        Method:   Renderer::AddVertexShader
 
-      Summary:  Add the vertex shader into the renderer and initialize it
+        Summary:  Add the vertex shader into the renderer
 
-      Args:     PCWSTR pszVertexShaderName
-                  Key of the vertex shader
-                const std::shared_ptr<VertexShader>&
-                  Vertex shader to add
+        Args:     PCWSTR pszVertexShaderName
+                    Key of the vertex shader
+                  const std::shared_ptr<VertexShader>&
+                    Vertex shader to add
 
-      Modifies: [m_vertexShaders].
+        Modifies: [m_vertexShaders].
 
-      Returns:  HRESULT
-                  Status code
-    M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M-M*/
-    /*--------------------------------------------------------------------
-      TODO: Renderer::AddVertexShader definition (remove the comment)
-    --------------------------------------------------------------------*/
+        Returns:  HRESULT
+                    Status code
+      M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M-M*/
     HRESULT Renderer::AddVertexShader(_In_ PCWSTR pszVertexShaderName, _In_ const std::shared_ptr<VertexShader>& vertexShader)
     {
         if (m_vertexShaders.contains(pszVertexShaderName))
@@ -331,6 +334,26 @@ namespace library
     }
 
     /*M+M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M
+      Method:   Renderer::HandleInput
+
+      Summary:  Add the pixel shader into the renderer and initialize it
+
+      Args:     const DirectionsInput& directions
+                  Data structure containing keyboard input data
+                const MouseRelativeMovement& mouseRelativeMovement
+                  Data structure containing mouse relative input data
+
+      Modifies: [m_camera].
+    M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M-M*/
+    /*--------------------------------------------------------------------
+      TODO: Renderer::HandleInput definition (remove the comment)
+    --------------------------------------------------------------------*/
+    void Renderer::HandleInput(_In_ const DirectionsInput& directions, _In_ const MouseRelativeMovement& mouseRelativeMovement, _In_ FLOAT deltaTime)
+    {
+        m_camera.HandleInput(directions,mouseRelativeMovement,deltaTime);
+    }
+
+    /*M+M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M
       Method:   Renderer::Update
 
       Summary:  Update the renderables each frame
@@ -347,6 +370,8 @@ namespace library
         {
             i.second->Update(deltaTime);
         }
+        
+        m_camera.Update(deltaTime);
     }
 
     /*M+M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M
@@ -370,7 +395,7 @@ namespace library
             m_immediateContext->IASetInputLayout(i.second->GetVertexLayout().Get()); ////////
             ConstantBuffer cb;
             cb.World = XMMatrixTranspose(i.second->GetWorldMatrix());
-            cb.View = XMMatrixTranspose(m_view);
+            cb.View = XMMatrixTranspose(m_camera.GetView());
             cb.Projection = XMMatrixTranspose(m_projection);
             m_immediateContext->UpdateSubresource(i.second->GetConstantBuffer().Get(), 0, nullptr, &cb, 0, 0);
             m_immediateContext->VSSetShader(i.second->GetVertexShader().Get(), nullptr, 0);///////////
@@ -397,9 +422,6 @@ namespace library
       Returns:  HRESULT
                   Status code
     M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M-M*/
-    /*--------------------------------------------------------------------
-      TODO: Renderer::SetVertexShaderOfRenderable definition (remove the comment)
-    --------------------------------------------------------------------*/
     HRESULT Renderer::SetVertexShaderOfRenderable(_In_ PCWSTR pszRenderableName, _In_ PCWSTR pszVertexShaderName)
     {
         HRESULT hr = S_OK;
@@ -452,9 +474,7 @@ namespace library
       Returns:  D3D_DRIVER_TYPE
                   The Direct3D driver type used
     M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M-M*/
-    /*--------------------------------------------------------------------
-      TODO: Renderer::GetDriverType definition (remove the comment)
-    --------------------------------------------------------------------*/
+
     D3D_DRIVER_TYPE Renderer::GetDriverType() const
     {
         return m_driverType;

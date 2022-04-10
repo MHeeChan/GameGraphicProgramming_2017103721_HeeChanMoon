@@ -7,7 +7,7 @@ public:
     virtual void Update(_In_ FLOAT deltaTime);
     CubeAct();
 private:
-    XMMATRIX value;
+
     XMMATRIX mSpin;
     XMMATRIX mOrbit;
     XMMATRIX mTranslate;

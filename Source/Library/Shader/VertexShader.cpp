@@ -65,6 +65,7 @@ namespace library
             //pVSBlob->Release();
             return hr;
         }
+        /////// Create the Direct #D vertex shader OBJECT!
 
         // Define the input layout
         D3D11_INPUT_ELEMENT_DESC layout[] =

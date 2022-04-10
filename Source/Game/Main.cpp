@@ -20,7 +20,6 @@
 #include "Game/Game.h"
 #include "Cube/MyCube.h"
 #include "Cube/UserCube.h"
-
 /*F+F+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   Function: wWinMain
 
@@ -110,6 +109,7 @@ INT WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
     {
         return 0;
     }
+
     /// ////
 
 

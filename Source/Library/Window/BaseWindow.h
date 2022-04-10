@@ -227,8 +227,9 @@ namespace library
         if (!RegisterClassEx(&wcex))
             return E_FAIL;
 
+
         m_hInstance = hInstance;
-        m_hWnd = CreateWindow(GetWindowClassName(), pszWindowName, dwStyle, x, y, 800, 600, hWndParent, hMenu, hInstance, this);
+        m_hWnd = CreateWindow(GetWindowClassName(), pszWindowName, dwStyle, x, y, nWidth,nHeight, hWndParent, hMenu, hInstance, this);
         if (!m_hWnd)
             return E_FAIL;
 
