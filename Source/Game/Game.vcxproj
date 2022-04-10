@@ -101,14 +101,16 @@
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CubeAct.cpp" />
     <ClCompile Include="Cube\BaseCube.cpp" />
+    <ClCompile Include="Cube\CubeAct.cpp" />
     <ClCompile Include="Cube\MyCube.cpp" />
+    <ClCompile Include="Cube\UserCube.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cube\BaseCube.h" />
     <ClInclude Include="Cube\CubeAct.h" />
+    <ClInclude Include="Cube\UserCube.h" />
     <ClInclude Include="MyCube.h" />
   </ItemGroup>
   <ItemGroup>

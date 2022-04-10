@@ -19,6 +19,7 @@
 #include "Cube/CubeAct.h"
 #include "Game/Game.h"
 #include "Cube/MyCube.h"
+#include "Cube/UserCube.h"
 
 /*F+F+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   Function: wWinMain
@@ -92,6 +93,20 @@ INT WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
         return 0;
     }
     if (game->GetRenderer()->SetPixelShaderOfRenderable(L"newCube", L"MainShader"))
+    {
+        return 0;
+    }
+
+    std::shared_ptr<UserCube> UC = std::make_shared<UserCube>();
+    if (FAILED(game->GetRenderer()->AddRenderable(L"UserCube", UC)))
+    {
+        return 0;
+    }
+    if (game->GetRenderer()->SetVertexShaderOfRenderable(L"UserCube", L"MainShader"))
+    {
+        return 0;
+    }
+    if (game->GetRenderer()->SetPixelShaderOfRenderable(L"UserCube", L"MainShader"))
     {
         return 0;
     }
