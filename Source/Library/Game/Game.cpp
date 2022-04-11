@@ -88,7 +88,7 @@ namespace library
 				m_renderer->Update(ElapsedSeconds);
 				QueryPerformanceCounter(&StartingTime);
 				m_renderer -> Render();
-				
+
 			}
 		}
 		return 0;

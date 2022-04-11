@@ -15,11 +15,12 @@ namespace library
                 PCWSTR pszWindowName
                     The window name
 
-      Returns:  HRESULT
+      Returns:  HRESULT 
                   Status code
     M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M-M*/
     HRESULT MainWindow::Initialize(_In_ HINSTANCE hInstance, _In_ INT nCmdShow, _In_ PCWSTR pszWindowName)
     {
+        BaseWindow::initialize(hInstance, nCmdShow, pszWindowName, WS_VISIBLE | WS_SYSMENU, 0, 0, 800, 600);
         static bool didInitRawInput = false;
         if (!didInitRawInput)
         {
@@ -34,28 +35,30 @@ namespace library
             if (!RegisterRawInputDevices(&rid, 1, sizeof(rid))) return E_FAIL;
             didInitRawInput = true;
         }
-
         RECT rc;
+
         POINT p1, p2;
 
-        GetClientRect(m_hWnd, &rc);
+        if (!GetClientRect(m_hWnd, &rc))
+            return 0;
 
         p1.x = rc.left;
-        p1.y = rc.top;
+        p1.y = rc.top - 31; // rc.top 으로 하니까 569나와서 31로 계산함
         p2.x = rc.right;
         p2.y = rc.bottom;
 
-        ClientToScreen(m_hWnd, &p1);
-        ClientToScreen(m_hWnd, &p2);
+        if (!ClientToScreen(m_hWnd, &p1))
+            return 0;
+        if (!ClientToScreen(m_hWnd, &p2))
+            return 0;
 
         rc.left = p1.x;
         rc.top = p1.y;
         rc.right = p2.x;
         rc.bottom = p2.y;
 
-        ClipCursor(&rc);
-
-        BaseWindow::initialize(hInstance, nCmdShow, pszWindowName, WS_VISIBLE | WS_SYSMENU,0,0,800,600);
+        if (!ClipCursor(&rc))
+            return 0;
         return S_OK;
     }
 
@@ -113,7 +116,7 @@ namespace library
                 static BYTE lpb[sizeof(RAWINPUT)];
 
                 GetRawInputData((HRAWINPUT)lParam, RID_INPUT, lpb, &dwSize, sizeof(RAWINPUTHEADER));
-                 // 해제해줘야되나?
+
                 if (lpb == NULL)
                 {
                     return 0;

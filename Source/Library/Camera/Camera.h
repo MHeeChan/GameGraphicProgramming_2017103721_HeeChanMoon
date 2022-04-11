@@ -20,7 +20,7 @@ namespace library
     /*C+C+++C+++C+++C+++C+++C+++C+++C+++C+++C+++C+++C+++C+++C+++C+++C+++C
       Class:    Camera
 
-      Summary:  Immitates a camera that moves according to the WASD and 
+      Summary:  Immitates a camera that moves according to the WASD and
               mouse input.
 
       Methods:  GetEye

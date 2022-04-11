@@ -1,9 +1,9 @@
 /*+===================================================================
   File:      COMMON.H
 
-  Summary:   Common header file that contains common header files and
-             macros used for the Library project of Game Graphics
-             Programming course.
+  Summary:   Common header file that contains common header files and 
+			 macros used for the Library project of Game Graphics
+			 Programming course.
 
   Functions:
 
