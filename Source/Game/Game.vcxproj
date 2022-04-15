@@ -101,17 +101,10 @@
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CubeAct.cpp" />
     <ClCompile Include="Cube\BaseCube.cpp" />
+    <ClCompile Include="Cube\Cube.cpp" />
     <ClCompile Include="Cube\MyCube.cpp" />
-    <ClCompile Include="Cube\UserCube.cpp" />
     <ClCompile Include="Main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Cube\BaseCube.h" />
-    <ClInclude Include="Cube\CubeAct.h" />
-    <ClInclude Include="Cube\MyCube.h" />
-    <ClInclude Include="Cube\UserCube.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\PS.hlsl" />
@@ -119,6 +112,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\Shaders.fxh" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Cube\BaseCube.h" />
+    <ClInclude Include="Cube\Cube.h" />
+    <ClInclude Include="Cube\MyCube.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

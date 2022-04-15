@@ -28,6 +28,7 @@ namespace library
         , m_pixelShaders()
         , m_camera(XMVectorSet(0.0f, 1.0f, -5.0f, 0.0f))
         , m_projection()
+        , m_padding()
     {}
 
     /*M+M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M
@@ -40,8 +41,9 @@ namespace library
 
       Modifies: [m_d3dDevice, m_featureLevel, m_immediateContext,
                  m_d3dDevice1, m_immediateContext1, m_swapChain1,
-                 m_swapChain, m_renderTargetView, m_vertexShader,
-                 m_vertexLayout, m_pixelShader, m_vertexBuffer].
+                 m_swapChain, m_renderTargetView, m_cbChangeOnResize,
+                 m_projection, m_camera, m_vertexShaders,
+                 m_pixelShaders, m_renderables].
 
       Returns:  HRESULT
                   Status code
@@ -231,6 +233,21 @@ namespace library
     // Initialize the projection matrix
     m_projection = XMMatrixPerspectiveFovLH(XM_PIDIV2, width / (FLOAT)height, 0.01f, 100.0f);
 
+    D3D11_BUFFER_DESC bd = {};
+    bd.ByteWidth = sizeof(CBChangeOnResize);
+    CBChangeOnResize CBR;
+    CBR.Projection = XMMatrixTranspose(m_projection);
+    hr = m_d3dDevice->CreateBuffer(&bd, nullptr, m_cbChangeOnResize.GetAddressOf());
+    m_immediateContext->UpdateSubresource(m_cbChangeOnResize.Get(), 0, nullptr, &CBR, 0, 0);
+    
+    if (FALSE(hr))
+    {
+        return 0;
+    }
+    m_immediateContext->VSSetConstantBuffers(1, 1, m_cbChangeOnResize.GetAddressOf());
+
+    m_camera.Initialize(m_d3dDevice.Get());
+
     for (auto i : m_vertexShaders)
     {
         i.second->Initialize(m_d3dDevice.Get());
@@ -387,23 +404,32 @@ namespace library
         UINT offset = 0;
         m_immediateContext->ClearRenderTargetView(m_renderTargetView.Get(), ClearColor);
         m_immediateContext->ClearDepthStencilView(m_depthStencilView.Get(), D3D11_CLEAR_DEPTH, 1.0f, 0);
-        
+        CBChangeOnCameraMovement CMC; // view
+        CMC.View = XMMatrixTranspose(m_camera.GetView()); ////////////여기 값이 이상한거 같은데
+        m_immediateContext->UpdateSubresource(m_camera.GetConstantBuffer().Get(), 0, nullptr, &CMC, 0, 0);
+        m_immediateContext->VSSetConstantBuffers(0, 1, m_camera.GetConstantBuffer().GetAddressOf());
+
         for (auto i : m_renderables)
         {
             m_immediateContext->IASetVertexBuffers(0, 1, i.second->GetVertexBuffer().GetAddressOf(), &stride, &offset);
             m_immediateContext->IASetIndexBuffer(i.second->GetIndexBuffer().Get(), DXGI_FORMAT_R16_UINT, 0);
-            m_immediateContext->IASetInputLayout(i.second->GetVertexLayout().Get()); ////////
-            ConstantBuffer cb;
-            cb.World = XMMatrixTranspose(i.second->GetWorldMatrix());
-            cb.View = XMMatrixTranspose(m_camera.GetView());
-            cb.Projection = XMMatrixTranspose(m_projection);
-            m_immediateContext->UpdateSubresource(i.second->GetConstantBuffer().Get(), 0, nullptr, &cb, 0, 0);
-            m_immediateContext->VSSetShader(i.second->GetVertexShader().Get(), nullptr, 0);///////////
-            m_immediateContext->VSSetConstantBuffers(0, 1, i.second->GetConstantBuffer().GetAddressOf());
-            m_immediateContext->PSSetShader(i.second->GetPixelShader().Get(), nullptr, 0);//////////
+            m_immediateContext->IASetInputLayout(i.second->GetVertexLayout().Get());
+            
+            
+            CBChangesEveryFrame CBE; // world
+            CBE.World = XMMatrixTranspose(i.second->GetWorldMatrix());
+            m_immediateContext->UpdateSubresource(i.second->GetConstantBuffer().Get(), 0, nullptr, &CBE, 0, 0);
+            
+            m_immediateContext->VSSetShader(i.second->GetVertexShader().Get(), nullptr, 0);
+
+            m_immediateContext->VSSetConstantBuffers(2, 1, i.second->GetConstantBuffer().GetAddressOf());
+            m_immediateContext->PSSetShader(i.second->GetPixelShader().Get(), nullptr, 0);
+           // m_immediateContext->PSSetConstantBuffers(2, 1, i.second->GetConstantBuffer().GetAddressOf()); ////
+            m_immediateContext->PSSetShaderResources(0, 1, i.second->GetTextureResourceView().GetAddressOf());
+            m_immediateContext->PSSetSamplers(0, 1, i.second->GetSamplerState().GetAddressOf());
+
             m_immediateContext->DrawIndexed(i.second->GetNumIndices(), 0, 0);
         }
-
         m_swapChain->Present(0, 0);
     }
 

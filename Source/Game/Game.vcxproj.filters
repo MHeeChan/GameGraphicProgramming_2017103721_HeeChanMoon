@@ -30,29 +30,12 @@
     <ClCompile Include="Cube\BaseCube.cpp">
       <Filter>소스 파일\Cube</Filter>
     </ClCompile>
-    <ClCompile Include="CubeAct.cpp">
+    <ClCompile Include="Cube\Cube.cpp">
       <Filter>소스 파일\Cube</Filter>
     </ClCompile>
     <ClCompile Include="Cube\MyCube.cpp">
-      <Filter>소스 파일\Cube</Filter>
+      <Filter>소스 파일\Cube\헤더 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Cube\UserCube.cpp">
-      <Filter>소스 파일\Cube</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Cube\CubeAct.h">
-      <Filter>소스 파일\Cube\헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Cube\BaseCube.h">
-      <Filter>소스 파일\Cube\헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Cube\MyCube.h">
-      <Filter>소스 파일\Cube\헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Cube\UserCube.h">
-      <Filter>소스 파일\Cube\헤더 파일</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\PS.hlsl">
@@ -66,5 +49,16 @@
     <None Include="Shaders\Shaders.fxh">
       <Filter>소스 파일\Shaders</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Cube\Cube.h">
+      <Filter>소스 파일\Cube\헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube\BaseCube.h">
+      <Filter>소스 파일\Cube\헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube\MyCube.h">
+      <Filter>소스 파일\Cube\헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -228,4 +228,37 @@ namespace library
         m_view = XMMatrixLookAtLH(m_eye, m_at, m_up);
 
     }
+
+    /*M+M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M
+  Method:   Camera::Initialize
+
+  Summary:  Initialize the view matrix constant buffers
+
+  Args:     ID3D11Device* pDevice
+              Pointer to a Direct3D 11 device
+
+  Modifies: [m_cbChangeOnCameraMovement].
+M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M-M*/
+    HRESULT Camera::Initialize(_In_ ID3D11Device* device)
+    {
+
+        // Create the constant buffer
+        D3D11_BUFFER_DESC bd = {};
+        HRESULT hr = S_OK;
+        bd.Usage = D3D11_USAGE_DEFAULT;
+        bd.ByteWidth = sizeof(CBChangeOnCameraMovement);
+        bd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+        bd.CPUAccessFlags = 0;
+        hr = device->CreateBuffer(&bd, nullptr, m_cbChangeOnCameraMovement.GetAddressOf()); // &m_constantBuffer
+        if (FAILED(hr))
+            return hr;
+
+        return hr;
+    }
+
+    ComPtr<ID3D11Buffer>& Camera::GetConstantBuffer()
+    {
+        return m_cbChangeOnCameraMovement;
+    }
+
 }

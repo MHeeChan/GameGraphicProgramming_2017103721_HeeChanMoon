@@ -37,11 +37,14 @@
     <Filter Include="소스 파일\Camera">
       <UniqueIdentifier>{79df1849-5abb-4de1-9e29-4cc52fc16fa8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Data">
+      <UniqueIdentifier>{f144da72-9c91-4f30-8869-ed377bb6e106}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Texture">
+      <UniqueIdentifier>{d9cdf8e2-ecc3-4b88-8448-f23febc23a8f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Common.h">
-      <Filter>소스 파일\Game\헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Game.h">
       <Filter>소스 파일\Game\헤더 파일</Filter>
     </ClInclude>
@@ -51,13 +54,7 @@
     <ClInclude Include="Window\MainWindow.h">
       <Filter>소스 파일\Window\헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>소스 파일\Game</Filter>
-    </ClInclude>
     <ClInclude Include="Renderer\Renderable.h">
-      <Filter>소스 파일\Renderer\헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer\DataTypes.h">
       <Filter>소스 파일\Renderer\헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Shader\Shader.h">
@@ -74,6 +71,18 @@
     </ClInclude>
     <ClInclude Include="Renderer\Renderer.h">
       <Filter>소스 파일\Renderer\헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\DataTypes.h">
+      <Filter>소스 파일\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Common.h">
+      <Filter>소스 파일\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>소스 파일\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture\DDSTextureLoader.h">
+      <Filter>소스 파일\Texture</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -105,6 +114,9 @@
     </ClCompile>
     <ClCompile Include="Camera\Camera.cpp">
       <Filter>소스 파일\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture\DDSTextureLoader.cpp">
+      <Filter>소스 파일\Texture</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
