@@ -33,7 +33,7 @@ namespace library
       Args:     ID3D11Device* pDevice
                   The Direct3D device to create the vertex shader
 
-      Returns:  HRESULT
+      Returns:  HRESULTfxh
                   Status code
     M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M---M-M*/
     HRESULT VertexShader::Initialize(_In_ ID3D11Device* pDevice)
@@ -66,6 +66,7 @@ namespace library
         {
             { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
             { "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+            { "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 20, D3D11_INPUT_PER_VERTEX_DATA, 0 }
         };
 
         UINT numElements = ARRAYSIZE(layout);// 

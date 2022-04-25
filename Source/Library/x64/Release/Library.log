@@ -1,5 +1,5 @@
-﻿  Renderer.cpp
-C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.h(1,1): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+﻿  VertexShader.cpp
+C:\Users\MHC\source\repos\GmG\Source\Library\Shader\VertexShader.h(1,1): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
 C:\Users\MHC\source\repos\GmG\Source\Library\Common.h(1,1): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winbase.h(7679,48): warning C5039: 'TpSetCallbackCleanupGroup': pointer or reference to potentially throwing function passed to 'extern "C"' function under -EHc. Undefined behavior may occur if this function throws an exception.
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\wincodec.h(666,34): warning C4820: 'WICBitmapPattern': '4' bytes padding added after data member 'WICBitmapPattern::Length'
@@ -586,19 +586,7 @@ C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\d3d12shader.h(187
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\d3d12shader.h(215,49): warning C4820: '_D3D12_FUNCTION_DESC': '4' bytes padding added after data member '_D3D12_FUNCTION_DESC::MinFeatureLevel'
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\DirectXMath.h(22,103): warning C4668: '_MANAGED' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\DirectXMath.h(22,118): warning C4668: '_M_CEE' is not defined as a preprocessor macro, replacing with '0' for '#if/#elif'
-C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderable.h(1,1): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
-C:\Users\MHC\source\repos\GmG\Source\Library\Shader\PixelShader.h(1,1): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
 C:\Users\MHC\source\repos\GmG\Source\Library\Shader\Shader.h(1,1): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
-C:\Users\MHC\source\repos\GmG\Source\Library\Shader\VertexShader.h(1,1): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
-C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderable.h(96,25): warning C4820: 'library::Renderable': '8' bytes padding added after data member 'library::Renderable::m_textureFilePath'
-C:\Users\MHC\source\repos\GmG\Source\Library\Window\MainWindow.h(1,1): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
-C:\Users\MHC\source\repos\GmG\Source\Library\Window\BaseWindow.h(1,1): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
-C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(28,11): warning C5038: data member 'library::Renderer::m_pixelShaders' will be initialized after data member 'library::Renderer::m_camera'
-C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(30,11): warning C5038: data member 'library::Renderer::m_projection' will be initialized after data member 'library::Renderer::m_padding'
-C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(234,56): warning C5219: implicit conversion from 'UINT' to 'FLOAT', possible loss of data
-C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(243,9): warning C4353: nonstandard extension used: constant 0 as function expression.  Use '__noop' function intrinsic instead
-C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(456,16): warning C4553: '==': result of expression not used; did you intend '='?
-C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.cpp(486,16): warning C4553: '==': result of expression not used; did you intend '='?
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt\wrl\implements.h(1623,1): warning C4365: 'initializing': conversion from 'LONG' to 'unsigned long', signed/unsigned mismatch
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt\wrl\implements.h(1623): message : while compiling class template member function 'unsigned long Microsoft::WRL::Details::RuntimeClassImpl<Microsoft::WRL::RuntimeClassFlags<2>,true,false,true,IUnknown>::InternalRelease(void) noexcept'
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt\wrl\implements.h(1585): message : see reference to function template instantiation 'unsigned long Microsoft::WRL::Details::RuntimeClassImpl<Microsoft::WRL::RuntimeClassFlags<2>,true,false,true,IUnknown>::InternalRelease(void) noexcept' being compiled

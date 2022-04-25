@@ -229,8 +229,8 @@ namespace library
 
     }
 
-    /*M+M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M+++M
-  Method:   Camera::Initialize
+    /*M+M+++M+++M+++M+++M+++M+++M+++M+++M+++M++M+++M+++M+++M+++M+++M+++M
+  Method:   Camera::Initialize+
 
   Summary:  Initialize the view matrix constant buffers
 

@@ -43,6 +43,9 @@
     <Filter Include="소스 파일\Texture">
       <UniqueIdentifier>{d9cdf8e2-ecc3-4b88-8448-f23febc23a8f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Light">
+      <UniqueIdentifier>{2a2d4f2f-2b99-4215-9a5c-971002403b0f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Game.h">
@@ -84,6 +87,9 @@
     <ClInclude Include="Texture\DDSTextureLoader.h">
       <Filter>소스 파일\Texture</Filter>
     </ClInclude>
+    <ClInclude Include="Light\PointLight.h">
+      <Filter>소스 파일\Light</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource.rc">
@@ -117,6 +123,9 @@
     </ClCompile>
     <ClCompile Include="Texture\DDSTextureLoader.cpp">
       <Filter>소스 파일\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Light\PointLight.cpp">
+      <Filter>소스 파일\Light</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

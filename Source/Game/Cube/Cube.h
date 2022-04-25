@@ -1,4 +1,4 @@
-﻿/*+===================================================================
+/*+===================================================================
   File:      CUBE1.H
 
   Summary:   Cube header file contains declarations of Cube class
@@ -30,7 +30,8 @@ C---C---C---C---C---C---C---C---C---C---C---C---C---C---C---C---C-C*/
 class Cube : public BaseCube
 {
 public:
-    Cube(const std::filesystem::path& textureFilePath);
+    Cube(_In_ const std::filesystem::path& textureFilePath);
+    Cube(_In_ const XMFLOAT4& outputColor);
     Cube(const Cube& other) = delete;
     Cube(Cube&& other) = delete;
     Cube& operator=(const Cube& other) = delete;
