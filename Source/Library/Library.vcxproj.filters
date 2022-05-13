@@ -46,6 +46,9 @@
     <Filter Include="소스 파일\Light">
       <UniqueIdentifier>{2a2d4f2f-2b99-4215-9a5c-971002403b0f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Model">
+      <UniqueIdentifier>{c20170df-ac7b-41cc-bce2-a0b87cb069f2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Game.h">
@@ -56,9 +59,6 @@
     </ClInclude>
     <ClInclude Include="Window\MainWindow.h">
       <Filter>소스 파일\Window\헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer\Renderable.h">
-      <Filter>소스 파일\Renderer\헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Shader\Shader.h">
       <Filter>소스 파일\Shader\헤더 파일</Filter>
@@ -89,6 +89,21 @@
     </ClInclude>
     <ClInclude Include="Light\PointLight.h">
       <Filter>소스 파일\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture\Material.h">
+      <Filter>소스 파일\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture\Texture.h">
+      <Filter>소스 파일\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture\WICTextureLoader.h">
+      <Filter>소스 파일\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Renderable.h">
+      <Filter>소스 파일\Renderer\헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\Model.h">
+      <Filter>소스 파일\Model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -126,6 +141,18 @@
     </ClCompile>
     <ClCompile Include="Light\PointLight.cpp">
       <Filter>소스 파일\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture\Material.cpp">
+      <Filter>소스 파일\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture\Texture.cpp">
+      <Filter>소스 파일\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture\WICTextureLoader.cpp">
+      <Filter>소스 파일\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\Model.cpp">
+      <Filter>소스 파일\Model</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

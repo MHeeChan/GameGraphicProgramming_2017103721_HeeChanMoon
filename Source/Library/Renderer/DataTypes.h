@@ -10,6 +10,8 @@ namespace library
       Summary:  Simple vertex structure containing a single field of the
                 type XMFLOAT3
     S---S---S---S---S---S---S---S---S---S---S---S---S---S---S---S---S-S*/
+#define NUM_LIGHTS (2)
+
     struct SimpleVertex
     {
         XMFLOAT3 Position;
