@@ -50,7 +50,7 @@ namespace library
         if (FAILED(hr))
         {
             MessageBox(nullptr,
-                L"The FX file cannot be compiled.  Please run this executable from the directory that contains the FX file.", L"Error", MB_OK);
+                L"The FX file cannot be compiled5.  Please run this executable from the directory that contains the FX file.", L"Error", MB_OK);
             return hr;
         }
 
@@ -59,9 +59,6 @@ namespace library
         //pPSBlob->Release();
         if (FAILED(hr))
             return hr;
-
-        ///////////// PixelShader creates a ID3D11PixelShader object
-
 
         return hr;
     }

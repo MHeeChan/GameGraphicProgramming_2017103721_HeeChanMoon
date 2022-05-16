@@ -20,7 +20,7 @@ SamplerState samLinear : register( s0 );
 
   Summary:  Constant buffer used for view transformation
 C---C---C---C---C---C---C---C---C---C---C---C---C---C---C---C---C-C*/
-cbuffer cbChangeOnCameraMovement : register( b0 )
+cbuffer cbChangeOnCameraMovement : register(b0)
 {
     matrix View;
     float4 CameraPosition;
@@ -31,7 +31,7 @@ cbuffer cbChangeOnCameraMovement : register( b0 )
 
   Summary:  Constant buffer used for projection transformation
 C---C---C---C---C---C---C---C---C---C---C---C---C---C---C---C---C-C*/
-cbuffer cbChangeOnResize : register( b1 )
+cbuffer cbChangeOnResize : register(b1)
 {
     matrix Projection;
 };
@@ -54,8 +54,8 @@ cbuffer cbChangesEveryFrame : register(b2)
 C---C---C---C---C---C---C---C---C---C---C---C---C---C---C---C---C-C*/
 cbuffer cbLights : register(b3)
 {
-    float4 LightPositions[NUM_LIGHTS];
-    float4 LightColors[NUM_LIGHTS];
+    float4 LightPositions[2];
+    float4 LightColors[2];
 };
 
 //--------------------------------------------------------------------------------------

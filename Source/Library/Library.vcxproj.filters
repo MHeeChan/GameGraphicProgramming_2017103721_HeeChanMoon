@@ -49,6 +49,9 @@
     <Filter Include="소스 파일\Model">
       <UniqueIdentifier>{c20170df-ac7b-41cc-bce2-a0b87cb069f2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Scene">
+      <UniqueIdentifier>{86d57d78-23b9-4912-96c7-b0b7c62ff795}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Game.h">
@@ -105,6 +108,15 @@
     <ClInclude Include="Model\Model.h">
       <Filter>소스 파일\Model</Filter>
     </ClInclude>
+    <ClInclude Include="Renderer\InstancedRenderable.h">
+      <Filter>소스 파일\Renderer\헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Scene.h">
+      <Filter>소스 파일\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Voxel.h">
+      <Filter>소스 파일\Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource.rc">
@@ -153,6 +165,15 @@
     </ClCompile>
     <ClCompile Include="Model\Model.cpp">
       <Filter>소스 파일\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\InstancedRenderable.cpp">
+      <Filter>소스 파일\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Scene.cpp">
+      <Filter>소스 파일\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Voxel.cpp">
+      <Filter>소스 파일\Scene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

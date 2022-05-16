@@ -55,6 +55,9 @@
     <None Include="Shaders\PhongShaders.fxh">
       <Filter>소스 파일\Shaders</Filter>
     </None>
+    <None Include="Shaders\VoxelShaders.fxh">
+      <Filter>소스 파일\Shaders</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cube\Cube.h">
