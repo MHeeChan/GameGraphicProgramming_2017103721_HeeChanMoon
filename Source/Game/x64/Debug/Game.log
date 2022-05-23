@@ -590,13 +590,13 @@ C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.2
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\atomic(308,9): warning C4365: 'argument': conversion from 'long' to 'unsigned int', signed/unsigned mismatch
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\atomic(325,9): warning C4365: 'argument': conversion from 'long' to 'unsigned int', signed/unsigned mismatch
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\atomic(388,9): warning C4365: 'argument': conversion from 'long' to 'unsigned int', signed/unsigned mismatch
+C:\Users\MHC\source\repos\GmG\Source\Library\Game\Game.h(1,1): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
 C:\Users\MHC\source\repos\GmG\Source\Library\Shader\PixelShader.h(1,1): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
 C:\Users\MHC\source\repos\GmG\Source\Library\Shader\Shader.h(1,1): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
 C:\Users\MHC\source\repos\GmG\Source\Library\Shader\VertexShader.h(1,1): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
-C:\Users\MHC\source\repos\GmG\Source\Library\Game\Game.h(1,1): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+C:\Users\MHC\source\repos\GmG\Source\Library\Model\Model.h(207,42): warning C4820: 'library::Model': '12' bytes padding added after data member 'library::Model::m_timeSinceLoaded'
 C:\Users\MHC\source\repos\GmG\Source\Library\Window\MainWindow.h(1,1): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
 C:\Users\MHC\source\repos\GmG\Source\Library\Window\BaseWindow.h(1,1): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
-C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\Renderer.h(108,24): warning C4820: 'library::Renderer': '8' bytes padding added after data member 'library::Renderer::m_pszMainSceneName'
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt\wrl\implements.h(1623,1): warning C4365: 'initializing': conversion from 'LONG' to 'unsigned long', signed/unsigned mismatch
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt\wrl\implements.h(1623): message : while compiling class template member function 'unsigned long Microsoft::WRL::Details::RuntimeClassImpl<Microsoft::WRL::RuntimeClassFlags<2>,true,false,true,IUnknown>::InternalRelease(void) noexcept'
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt\wrl\implements.h(1585): message : see reference to function template instantiation 'unsigned long Microsoft::WRL::Details::RuntimeClassImpl<Microsoft::WRL::RuntimeClassFlags<2>,true,false,true,IUnknown>::InternalRelease(void) noexcept' being compiled
@@ -605,13 +605,13 @@ C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt\wrl\event.h(44
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt\wrl\implements.h(1619,1): warning C4365: 'return': conversion from 'LONG' to 'unsigned long', signed/unsigned mismatch
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt\wrl\implements.h(1615): message : while compiling class template member function 'unsigned long Microsoft::WRL::Details::RuntimeClassImpl<Microsoft::WRL::RuntimeClassFlags<2>,true,false,true,IUnknown>::InternalAddRef(void) noexcept'
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt\wrl\implements.h(1580): message : see reference to function template instantiation 'unsigned long Microsoft::WRL::Details::RuntimeClassImpl<Microsoft::WRL::RuntimeClassFlags<2>,true,false,true,IUnknown>::InternalAddRef(void) noexcept' being compiled
-C:\Users\MHC\source\repos\GmG\Source\Game\Main.cpp(197): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
-C:\Users\MHC\source\repos\GmG\Source\Game\Main.cpp(193): message : index 'i' range checked by comparison on this line
-C:\Users\MHC\source\repos\GmG\Source\Game\Main.cpp(197): message : feeds call on this line
-C:\Users\MHC\source\repos\GmG\Source\Game\Main.cpp(183): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
-C:\Users\MHC\source\repos\GmG\Source\Game\Main.cpp(179): message : index 'i' range checked by comparison on this line
-C:\Users\MHC\source\repos\GmG\Source\Game\Main.cpp(183): message : feeds call on this line
-C:\Users\MHC\source\repos\GmG\Source\Game\Main.cpp(167): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
-C:\Users\MHC\source\repos\GmG\Source\Game\Main.cpp(165): message : index '' range checked by comparison on this line
-C:\Users\MHC\source\repos\GmG\Source\Game\Main.cpp(167): message : feeds call on this line
+C:\Users\MHC\source\repos\GmG\Source\Game\Main.cpp(191): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+C:\Users\MHC\source\repos\GmG\Source\Game\Main.cpp(187): message : index 'i' range checked by comparison on this line
+C:\Users\MHC\source\repos\GmG\Source\Game\Main.cpp(191): message : feeds call on this line
+C:\Users\MHC\source\repos\GmG\Source\Game\Main.cpp(177): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+C:\Users\MHC\source\repos\GmG\Source\Game\Main.cpp(173): message : index 'i' range checked by comparison on this line
+C:\Users\MHC\source\repos\GmG\Source\Game\Main.cpp(177): message : feeds call on this line
+C:\Users\MHC\source\repos\GmG\Source\Game\Main.cpp(161): warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+C:\Users\MHC\source\repos\GmG\Source\Game\Main.cpp(159): message : index '' range checked by comparison on this line
+C:\Users\MHC\source\repos\GmG\Source\Game\Main.cpp(161): message : feeds call on this line
   Game.vcxproj -> C:\Users\MHC\source\repos\GmG\Build\x64\Debug\Game.exe

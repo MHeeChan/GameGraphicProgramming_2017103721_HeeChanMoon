@@ -1,4 +1,4 @@
-﻿  InstancedRenderable.cpp
+﻿  Model.cpp
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winbase.h(7679,48): warning C5039: 'TpSetCallbackCleanupGroup': pointer or reference to potentially throwing function passed to 'extern "C"' function under -EHc. Undefined behavior may occur if this function throws an exception.
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\wincodec.h(666,34): warning C4820: 'WICBitmapPattern': '4' bytes padding added after data member 'WICBitmapPattern::Length'
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\wincodec.h(669,5): warning C4820: 'WICBitmapPattern': '4' bytes padding added after data member 'WICBitmapPattern::EndOfStream'
@@ -587,10 +587,53 @@ C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\DirectXMath.h(22,
 C:\Users\MHC\source\repos\GmG\Source\Library\Shader\PixelShader.h(1,1): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
 C:\Users\MHC\source\repos\GmG\Source\Library\Shader\Shader.h(1,1): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
 C:\Users\MHC\source\repos\GmG\Source\Library\Shader\VertexShader.h(1,1): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
-C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\InstancedRenderable.h(73,5): warning C4820: 'library::InstancedRenderable': '8' bytes padding added after data member 'library::InstancedRenderable::m_padding'
-C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\InstancedRenderable.cpp(34,9): warning C5038: data member 'library::InstancedRenderable::m_padding' will be initialized after data member 'library::InstancedRenderable::m_instanceBuffer'
-C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\InstancedRenderable.cpp(78,5): warning C4267: 'return': conversion from 'size_t' to 'UINT', possible loss of data
-C:\Users\MHC\source\repos\GmG\Source\Library\Renderer\InstancedRenderable.cpp(100,69): warning C4267: '=': conversion from 'size_t' to 'UINT', possible loss of data
+C:\Users\MHC\source\repos\GmG\Source\Library\Model\Model.h(207,42): warning C4820: 'library::Model': '4' bytes padding added after data member 'library::Model::m_timeSinceLoaded'
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\defs.h(168,13): warning C4619: #pragma warning: there is no warning number '4351'
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\types.h(308,1): warning C4365: 'initializing': conversion from 'ai_uint32' to 'ai_int32', signed/unsigned mismatch
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\types.h(312,1): warning C4365: '=': conversion from 'ai_int32' to 'ai_uint32', signed/unsigned mismatch
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\types.h(313,1): warning C4365: 'argument': conversion from 'ai_int32' to 'size_t', signed/unsigned mismatch
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\texture.h(178,29): warning C4820: 'aiTexture': '7' bytes padding added after data member 'aiTexture::achFormatHint'
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\texture.h(215,1): warning C4820: 'aiTexture': '4' bytes padding added after data member 'aiTexture::mFilename'
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\mesh.h(55,9): warning C4619: #pragma warning: there is no warning number '4351'
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\mesh.h(141,27): warning C4820: 'aiFace': '4' bytes padding added after data member 'aiFace::mNumIndices'
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\mesh.h(459,35): warning C4820: 'aiAnimMesh': '4' bytes padding added after data member 'aiAnimMesh::mName'
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\mesh.h(624,35): warning C4820: 'aiMesh': '4' bytes padding added after data member 'aiMesh::mNumFaces'
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\mesh.h(710,29): warning C4820: 'aiMesh': '4' bytes padding added after data member 'aiMesh::mNumBones'
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\mesh.h(739,38): warning C4820: 'aiMesh': '4' bytes padding added after data member 'aiMesh::mNumAnimMeshes'
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\mesh.h(754,44): warning C4820: 'aiMesh': '4' bytes padding added after data member 'aiMesh::mAABB'
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\material.h(656,16): warning C4820: 'aiMaterialProperty': '4' bytes padding added after data member 'aiMaterialProperty::mType'
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\material.inl(173,1): warning C4061: enumerator 'aiPTI_String' in switch of enum 'aiPropertyTypeInfo' is not explicitly handled by a case label
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\material.h(558): message : see declaration of 'aiPropertyTypeInfo'
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\material.inl(173,1): warning C4061: enumerator '_aiPTI_Force32Bit' in switch of enum 'aiPropertyTypeInfo' is not explicitly handled by a case label
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\material.h(558): message : see declaration of 'aiPropertyTypeInfo'
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\anim.h(106,1): warning C4820: 'aiVectorKey': '4' bytes padding added after data member 'aiVectorKey::mValue'
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\anim.h(193,1): warning C4820: 'aiMeshKey': '4' bytes padding added after data member 'aiMeshKey::mValue'
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\anim.h(222,1): warning C4820: 'aiMeshMorphKey': '4' bytes padding added after data member 'aiMeshMorphKey::mNumValuesAndWeights'
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\anim.h(291,38): warning C4820: 'aiNodeAnim': '4' bytes padding added after data member 'aiNodeAnim::mNumRotationKeys'
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\anim.h(301,39): warning C4820: 'aiNodeAnim': '4' bytes padding added after data member 'aiNodeAnim::mNumScalingKeys'
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\anim.h(408,21): warning C4820: 'aiAnimation': '4' bytes padding added after data member 'aiAnimation::mName'
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\anim.h(419,36): warning C4820: 'aiAnimation': '4' bytes padding added after data member 'aiAnimation::mNumChannels'
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\anim.h(427,40): warning C4820: 'aiAnimation': '4' bytes padding added after data member 'aiAnimation::mNumMeshChannels'
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\anim.h(435,50): warning C4820: 'aiAnimation': '4' bytes padding added after data member 'aiAnimation::mNumMorphMeshChannels'
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\metadata.h(89,16): warning C4820: 'aiMetadataEntry': '4' bytes padding added after data member 'aiMetadataEntry::mType'
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\metadata.h(151,29): warning C4820: 'aiMetadata': '4' bytes padding added after data member 'aiMetadata::mNumProperties'
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\metadata.h(223,1): warning C4061: enumerator 'AI_META_MAX' in switch of enum 'aiMetadataType' is not explicitly handled by a case label
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\metadata.h(64): message : see declaration of 'aiMetadataType'
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\metadata.h(275,1): warning C4061: enumerator 'AI_META_MAX' in switch of enum 'aiMetadataType' is not explicitly handled by a case label
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\metadata.h(64): message : see declaration of 'aiMetadataType'
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\metadata.h(518,1): warning C4061: enumerator 'AI_META_MAX' in switch of enum 'aiMetadataType' is not explicitly handled by a case label
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\metadata.h(64): message : see declaration of 'aiMetadataType'
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\scene.h(112,29): warning C4820: 'aiNode': '4' bytes padding added after data member 'aiNode::mTransformation'
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\scene.h(118,32): warning C4820: 'aiNode': '4' bytes padding added after data member 'aiNode::mNumChildren'
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\scene.h(126,26): warning C4820: 'aiNode': '4' bytes padding added after data member 'aiNode::mNumMeshes'
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\scene.h(260,31): warning C4820: 'aiScene': '4' bytes padding added after data member 'aiScene::mFlags'
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\scene.h(272,30): warning C4820: 'aiScene': '4' bytes padding added after data member 'aiScene::mNumMeshes'
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\scene.h(284,37): warning C4820: 'aiScene': '4' bytes padding added after data member 'aiScene::mNumMaterials'
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\scene.h(294,39): warning C4820: 'aiScene': '4' bytes padding added after data member 'aiScene::mNumAnimations'
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\scene.h(305,35): warning C4820: 'aiScene': '4' bytes padding added after data member 'aiScene::mNumTextures'
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\scene.h(317,31): warning C4820: 'aiScene': '4' bytes padding added after data member 'aiScene::mNumLights'
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\scene.h(331,33): warning C4820: 'aiScene': '4' bytes padding added after data member 'aiScene::mNumCameras'
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\scene.h(432,19): warning C4820: 'aiScene': '4' bytes padding added after data member 'aiScene::mName'
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt\wrl\implements.h(1623,1): warning C4365: 'initializing': conversion from 'LONG' to 'unsigned long', signed/unsigned mismatch
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt\wrl\implements.h(1623): message : while compiling class template member function 'unsigned long Microsoft::WRL::Details::RuntimeClassImpl<Microsoft::WRL::RuntimeClassFlags<2>,true,false,true,IUnknown>::InternalRelease(void) noexcept'
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt\wrl\implements.h(1585): message : see reference to function template instantiation 'unsigned long Microsoft::WRL::Details::RuntimeClassImpl<Microsoft::WRL::RuntimeClassFlags<2>,true,false,true,IUnknown>::InternalRelease(void) noexcept' being compiled
@@ -599,6 +642,17 @@ C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt\wrl\event.h(44
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt\wrl\implements.h(1619,1): warning C4365: 'return': conversion from 'LONG' to 'unsigned long', signed/unsigned mismatch
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt\wrl\implements.h(1615): message : while compiling class template member function 'unsigned long Microsoft::WRL::Details::RuntimeClassImpl<Microsoft::WRL::RuntimeClassFlags<2>,true,false,true,IUnknown>::InternalAddRef(void) noexcept'
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\winrt\wrl\implements.h(1580): message : see reference to function template instantiation 'unsigned long Microsoft::WRL::Details::RuntimeClassImpl<Microsoft::WRL::RuntimeClassFlags<2>,true,false,true,IUnknown>::InternalAddRef(void) noexcept' being compiled
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\utility(249,55): warning C4365: 'initializing': conversion from '_Ty' to '_Ty2', signed/unsigned mismatch
+          with
+          [
+              _Ty=unsigned int
+          ]
+          and
+          [
+              _Ty2=int
+          ]
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\scene.h(423): message : see reference to function template instantiation 'std::pair<const aiTexture *,int>::pair<aiTexture*,unsigned int,0>(std::pair<aiTexture *,unsigned int> &&) noexcept' being compiled
+C:\Users\MHC\source\repos\GmG\Source\Library\assimp\scene.h(423): message : see reference to function template instantiation 'std::pair<const aiTexture *,int>::pair<aiTexture*,unsigned int,0>(std::pair<aiTexture *,unsigned int> &&) noexcept' being compiled
 assimp-vc142-mt.lib(assimp-vc142-mt.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in d3d11.lib(d3d11.dll); second definition ignored
 Model.obj : warning LNK4006: "public: unsigned int __cdecl aiMaterial::GetTextureCount(enum aiTextureType)const " (?GetTextureCount@aiMaterial@@QEBAIW4aiTextureType@@@Z) already defined in assimp-vc142-mt.lib(assimp-vc142-mt.dll); second definition ignored
 Model.obj : warning LNK4006: "public: enum aiReturn __cdecl aiMaterial::GetTexture(enum aiTextureType,unsigned int,struct aiString *,enum aiTextureMapping *,unsigned int *,float *,enum aiTextureOp *,enum aiTextureMapMode *)const " (?GetTexture@aiMaterial@@QEBA?AW4aiReturn@@W4aiTextureType@@IPEAUaiString@@PEAW4aiTextureMapping@@PEAIPEAMPEAW4aiTextureOp@@PEAW4aiTextureMapMode@@@Z) already defined in assimp-vc142-mt.lib(assimp-vc142-mt.dll); second definition ignored
