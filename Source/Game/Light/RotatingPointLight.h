@@ -1,7 +1,7 @@
 /*+===================================================================
   File:      ROTATINGPOINTLIGHT.H
 
-  Summary:   RotatingPointLight header file contains 
+  Summary:   RotatingPointLight header file contains
              declarations of the rotating point light.
 
   Classes: RotatingPointLight
@@ -30,11 +30,11 @@ class RotatingPointLight final : public library::PointLight
 {
 public:
     RotatingPointLight() = delete;
-    RotatingPointLight(_In_ const XMFLOAT4& position, _In_ const XMFLOAT4& color);
+    RotatingPointLight(_In_ const XMFLOAT4& position, _In_ const XMFLOAT4& color, _In_ FLOAT attenuationDistance);
     RotatingPointLight(const RotatingPointLight& other) = default;
     RotatingPointLight(RotatingPointLight&& other) = default;
-    RotatingPointLight& operator=(const RotatingPointLight & other) = default;
-    RotatingPointLight& operator=(RotatingPointLight && other) = default;
+    RotatingPointLight& operator=(const RotatingPointLight& other) = default;
+    RotatingPointLight& operator=(RotatingPointLight&& other) = default;
     virtual ~RotatingPointLight() = default;
 
     virtual void Update(_In_ FLOAT deltaTime) override;

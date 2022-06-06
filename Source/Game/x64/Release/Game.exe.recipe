@@ -7,6 +7,12 @@
   </ProjectOutputs>
   <ContentFiles>
     <ContentFile>
+      <FullPath>C:\Users\MHC\source\repos\GmG\Build\x64\Release\CubeMap_PS.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>C:\Users\MHC\source\repos\GmG\Build\x64\Release\CubeMap_VS.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
       <FullPath>C:\Users\MHC\source\repos\GmG\Build\x64\Release\PS.cso</FullPath>
     </ContentFile>
     <ContentFile>

@@ -1,12 +1,9 @@
 /*+===================================================================
   File:      MODEL.H
-
   Summary:   Model header file contains declarations of
              Model class used for the lab samples of Game
              Graphics Programming course.
-
   Classes: Model
-
   ?2022 Kyung Hee University
 ===================================================================+*/
 #pragma once
@@ -35,9 +32,7 @@ namespace library
 {
     /*C+C+++C+++C+++C+++C+++C+++C+++C+++C+++C+++C+++C+++C+++C+++C+++C+++C
       Class:    Model
-
       Summary:  Model class is a renderable from model files
-
       Methods:  Initialize
                   Pure virtual function that initializes the object
                 Update
@@ -152,7 +147,7 @@ namespace library
         );
         void initMeshBones(_In_ UINT uMeshIndex, _In_ const aiMesh* pMesh);
         void initMeshSingleBone(_In_ UINT uBoneIndex, _In_ const aiBone* pBone);
-        void initSingleMesh(_In_ UINT uMeshIndex, _In_ const aiMesh* pMesh);
+        virtual void initSingleMesh(_In_ UINT uMeshIndex, _In_ const aiMesh* pMesh);
         void interpolatePosition(_Inout_ XMFLOAT3& outTranslate, _In_ FLOAT animationTimeTicks, _In_ const aiNodeAnim* pNodeAnim);
         void interpolateRotation(_Inout_ XMVECTOR& outQuaternion, _In_ FLOAT animationTimeTicks, _In_ const aiNodeAnim* pNodeAnim);
         void interpolateScaling(_Inout_ XMFLOAT3& outScale, _In_ FLOAT animationTimeTicks, _In_ const aiNodeAnim* pNodeAnim);
