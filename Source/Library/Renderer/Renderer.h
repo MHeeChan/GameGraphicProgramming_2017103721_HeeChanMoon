@@ -1,13 +1,10 @@
 /*+===================================================================
   File:      RENDERER.H
-
   Summary:   Renderer header file contains declarations of Renderer
              class used for the lab samples of Game Graphics
              Programming course.
-
   Classes: Renderer
-
-  ?2022 Kyung Hee University
+  2022 Kyung Hee University
 ===================================================================+*/
 #pragma once
 
@@ -22,16 +19,16 @@
 #include "Shader/PixelShader.h"
 #include "Shader/VertexShader.h"
 #include "Window/MainWindow.h"
+#include "Texture/RenderTexture.h"
+#include "Shader/ShadowVertexShader.h"
 
 namespace library
 {
 
     /*C+C+++C+++C+++C+++C+++C+++C+++C+++C+++C+++C+++C+++C+++C+++C+++C+++C
       Class:    Renderer
-
       Summary:  Renderer initializes Direct3D, and renders renderable
                 data onto the screen
-
       Methods:  Initialize
                   Creates Direct3D device and swap chain
                 AddRenderable
@@ -62,12 +59,17 @@ namespace library
         HRESULT AddScene(_In_ PCWSTR pszSceneName, _In_ const std::shared_ptr<Scene>& scene);
         std::shared_ptr<Scene> GetSceneOrNull(_In_ PCWSTR pszSceneName);
         HRESULT SetMainScene(_In_ PCWSTR pszSceneName);
+        void SetShadowMapShaders(_In_ std::shared_ptr<ShadowVertexShader> vertexShader, _In_ std::shared_ptr<PixelShader> pixelShader);
 
         void HandleInput(_In_ const DirectionsInput& directions, _In_ const MouseRelativeMovement& mouseRelativeMovement, _In_ FLOAT deltaTime);
         void Update(_In_ FLOAT deltaTime);
         void Render();
+        void RenderSceneToTexture();
 
         D3D_DRIVER_TYPE GetDriverType() const;
+
+        std::shared_ptr<MainWindow> WindowPtr;
+
 
     private:
         D3D_DRIVER_TYPE m_driverType;
@@ -83,12 +85,22 @@ namespace library
         ComPtr<ID3D11DepthStencilView> m_depthStencilView;
         ComPtr<ID3D11Buffer> m_cbChangeOnResize;
         ComPtr<ID3D11Buffer> m_cbLights;
+        ComPtr<ID3D11Buffer> m_cbShadowMatrix;
         PCWSTR m_pszMainSceneName;
         BYTE m_padding[8];
         Camera m_camera;
         XMMATRIX m_projection;
 
+        std::unordered_map<PCWSTR, std::shared_ptr<Renderable>> m_renderables;
+        std::unordered_map<PCWSTR, std::shared_ptr<Model>> m_models;
+        std::shared_ptr<PointLight> m_aPointLights[NUM_LIGHTS];
+        std::unordered_map<PCWSTR, std::shared_ptr<VertexShader>> m_vertexShaders;
+        std::unordered_map<PCWSTR, std::shared_ptr<PixelShader>> m_pixelShaders;
         std::unordered_map<std::wstring, std::shared_ptr<Scene>> m_scenes;
         std::shared_ptr<Texture> m_invalidTexture;
+        std::shared_ptr<RenderTexture> m_shadowMapTexture;
+        std::shared_ptr<ShadowVertexShader> m_shadowVertexShader;
+        std::shared_ptr<PixelShader> m_shadowPixelShader;
     };
+
 }

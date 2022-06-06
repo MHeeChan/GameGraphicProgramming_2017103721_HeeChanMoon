@@ -82,10 +82,11 @@ namespace library
         if (FAILED(hr))
             return hr;
 
-        if (HasTexture() && m_aNormalData.empty())
+        if (m_aNormalData.empty())
         {
             calculateNormalMapVectors();
         }
+
         /////create the normal buffer
         bd.Usage = D3D11_USAGE_DEFAULT;
         bd.ByteWidth = sizeof(NormalData) * static_cast<UINT>(m_aNormalData.size()),
